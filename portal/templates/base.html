@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+{% load  static %}
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="theme-color" content="#195128">
+    <title>Mestrado Gean - {% block title %}{% endblock %}</title>
+    <!-- Font Awesome -->
+    <link href="{% static 'fontawesome-free-5.12.1-web/css/all.css' %}" rel="stylesheet" media="all">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet" media="all">
+    <!-- Your custom styles (optional) -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+
+    {% block head %}
+
+    {% endblock %}
+</head>
+<body class="hidden-sn mdb-skin">
+
+<!--Double navigation-->
+<header>
+    <!-- Sidebar navigation -->
+    <div id="slide-out" class="side-nav sn-bg-4">
+        <ul class="custom-scrollbar">
+            <!-- Logo -->
+            <li>
+                    <img src="{% static 'img/logo_ipen_azul_tr.png' %}" class="flex-center mt-2 mb-2"
+                         width="90%">
+            </li>
+            <!--/. Logo -->
+            <li class="social">
+            </li>
+            <!-- Side navigation links -->
+            <li>
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                        <a href="{% url 'home' %}"
+                           class="collapsible-header waves-effect arrow-r {% block class_dashboard %}{% endblock %}"><i
+                                class="fa fa-home"></i> Home</a>
+                    </li>
+
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r
+                                {% block class_cadastro_menu %}{% endblock %}"><i class="fas fa-plus-circle"></i>
+                            Cadastros<i class="fas fa-angle-down rotate-icon"></i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="#" class="waves-effect
+                                            {% block class_projeto_item %}{% endblock %}">Projeto</a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                       class="waves-effect {% block class_elemento_item %}{% endblock %}">Elemento</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="waves-effect
+                                            {% block class_medicao_item %}{% endblock %}">Medição</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+{#                    <li>#}
+{#                        <a class="collapsible-header waves-effect arrow-r#}
+{#                                {% block class_financeiro_menu %}{% endblock %}"><i class="fas fa-money-bill-wave"></i>#}
+{#                            Financeiro<i class="fas fa-angle-down rotate-icon"></i></a>#}
+{#                        <div class="collapsible-body">#}
+{#                            <ul>#}
+{#                                <li>#}
+{#                                    <a href="#"#}
+{#                                       class="waves-effect {% block class_despesa_item %}{% endblock %}">Despesa</a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#"#}
+{#                                       class="waves-effect {% block class_receita_item %}{% endblock %}">Receita</a>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="#"#}
+{#                                       class="waves-effect {% block class_movimento_item %}{% endblock %}">Movimento</a>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    </li>#}
+
+                    <li>
+                        <a href="{% url 'logout' %}" class="collapsible-header waves-effect arrow-r red-text"><i
+                                class="fa fa-sign-out-alt"></i> Sair</a>
+                    </li>
+                </ul>
+            </li>
+            <!--/. Side navigation links -->
+        </ul>
+        <div class="sidenav-bg mask-strong"></div>
+    </div>
+    <!--/. Sidebar navigation -->
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg double-nav">
+        <!-- SideNav slide-out button -->
+        <div class="float-left">
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
+        </div>
+        <!-- Breadcrumb-->
+        <div class="breadcrumb-dn mr-auto">
+            <p>Mestrado Geaan</p>
+        </div>
+    </nav>
+    <!-- /.Navbar -->
+</header>
+<!--/.Double navigation-->
+
+<!--Main layout-->
+<div class="content">
+    <main>
+        <div class="container-fluid">
+
+            {% block breadcrumb_base %}
+            {% endblock %}
+
+            {% block content %}
+            {% endblock %}
+    </main>
+</div>
+<!--/Main layout-->
+
+
+<!-- Footer -->
+<footer class="page-footer font-small pt-2" id="footer">
+
+    <!-- Footer Links -->
+    <div class="container-fluid text-left">
+
+        <!-- Grid row -->
+        <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-6 mt-md-0 mt-3">
+
+                <!-- Content -->
+                <h5 class="text-uppercase font-weight-bold">INSTITUTO DE PESQUISAS ENERGÉTICAS E NUCLEARES</h5>
+
+                <ul class="list-unstyled">
+                    {#                    <li class="list-inline-item">#}
+                    {#                        <!-- Facebook -->#}
+                    {#                        <a class="fb-ic" href="https://www.facebook.com/kmnegociosagropecuarios" target="_blank">#}
+                    {#                            <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>#}
+                    {#                        </a>#}
+                    {#                    </li>#}
+                    {#                    <li class="list-inline-item">#}
+                    {#                        <!--Instagram-->#}
+                    {#                        <a class="ins-ic" href="https://www.instagram.com/kmnegociosagropecuarios/" target="_blank">#}
+                    {#                            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>#}
+                    {#                        </a>#}
+                    {#                    </li>#}
+                </ul>
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none pb-3">
+
+            <!-- Grid column -->
+            <div class="col-md-4 mb-md-0 mb-3">
+
+                <!-- Links -->
+                <h5 class="text-uppercase font-weight-bold">INSTITUTO FEDERAL DE RONDÔNIA</h5>
+
+                <ul class="list-unstyled">
+                    {#                    <li>#}
+                    {#                        <a href="#">Sua conta</a>#}
+                    {#                    </li>#}
+                    {#                    <li>#}
+                    {#                        <a href="#">Ajuda</a>#}
+                    {#                    </li>#}
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-2 mb-md-0 mb-3">
+
+                <!-- Links -->
+                <h5 class="text-uppercase font-weight-bold">Contato</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <i class="fa fa-phone-square"></i> (69) 9 9956-3756
+                    </li>
+                    <li>
+                        <i class="fa fa-envelope"></i> gean.lima@ifro.edu.br
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Todos os direitos reservados
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!--/.Footer-->
+
+<!-- SCRIPTS -->
+
+<!-- JQuery -->
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+<!-- Font Awesome -->
+<script defer src="{% static 'fontawesome-free-5.12.1-web/js/all.js' %}"></script> <!--load all styles -->
+
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <script type='text/javascript'>
+                $("document").ready(function () {
+                    toastr["danger"]("{{ message }}")
+                });
+            </script>
+        {% elif message.tags == 'success' %}
+            <script type='text/javascript'>
+                $("document").ready(function () {
+                    toastr["success"]("{{ message }}")
+                });
+            </script>
+        {% elif message.tags == 'warning' %}
+            <script type='text/javascript'>
+                $("document").ready(function () {
+                    toastr["warning"]("{{ message }}")
+                });
+            </script>
+        {% elif message.tags == 'info' %}
+            <script type='text/javascript'>
+                $("document").ready(function () {
+                    toastr["info"]("{{ message }}")
+                });
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<script>
+    $(document).ready(function () {
+        // SideNav Button Initialization
+        $(".button-collapse").sideNav();
+        // SideNav Scrollbar Initialization
+        var sideNavScrollbar = document.querySelector('.custom-scrollbar');
+        var ps = new PerfectScrollbar(sideNavScrollbar);
+
+        //material select
+        $('.mdb-select').materialSelect();
+        $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+            $(this).closest('.select-outline').find('label').toggleClass('active');
+            $(this).closest('.select-outline').find('.caret').toggleClass('active');
+        });
+    });
+    new WOW().init();
+
+</script>
+<script>
+    $('.datepicker').pickadate({
+        format: "dd/mm/yyyy",
+        formatSubmit: 'yyyy-mm-dd',
+        mode: 'landscape',
+        monthsFull: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+        monthsShort: ["Jan", "Fev", "Mar", "Abr", "Maio", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+        weekdaysFull: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado",],
+        weekdaysShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb",],
+        weekdaysLetter: ["D", "S", "T", "Q", "Q", "S", "S"],
+        labelMonthNext: 'Próximo mês',
+        labelMonthPrev: 'Mês anterior',
+        labelMonthSelect: 'Selecione um mês',
+        labelYearSelect: 'Selecione um ano',
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: true, // Creates a dropdown of 15 years to control year,
+        today: 'Hoje',
+        clear: 'Limpar',
+        close: 'Ok',
+        closeOnSelect: false // Close upon selecting a date,
+    });
+</script>
+<script type='text/javascript'>
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "md-toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": 300,
+        "hideDuration": 1000,
+        "timeOut": 3500,
+        "extendedTimeOut": 1000,
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
+{% block script %}
+
+{% endblock %}
+</body>
+</html>
