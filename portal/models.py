@@ -9,3 +9,6 @@ class Elemento(models.Model):
 
 class Medicao(models.Model):
     pass
+
+    class Meta:
+        verbose_name_plural = 'Medições'
