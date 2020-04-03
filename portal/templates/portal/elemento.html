@@ -33,6 +33,7 @@
                     <thead>
                     <tr>
                         <th scope="col">Descrição</th>
+                        <th scope="col">Símbolo</th>
                         <th scope="col" style="text-align: right; width: 8%">Ações</th>
                     </tr>
                     </thead>
@@ -40,6 +41,7 @@
                     {% for elemento in elementos %}
                         <tr>
                             <td>{{ elemento.descricao }}</td>
+                            <td>{{ elemento.simbolo }}</td>
                             <td style="text-align: right; width: 8%">
                                 <a href="#"><i class="fas fa-pencil-alt mr-1 orange-text"></i></a>
                                 <a data-toggle="modal" href="#Excluir"><i class="fas fa-trash mr-1 red-text"></i></a>
