@@ -52,16 +52,16 @@
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a href="#" class="waves-effect {% block class_certificado_item %}{% endblock %}">Certificado</a>
+                                    <a href="{% url 'certificado' %}" class="waves-effect {% block class_certificado_item %}{% endblock %}">Certificado</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="waves-effect {% block class_elemento_item %}{% endblock %}">Elemento</a>
+                                    <a href="{% url 'elemento' %}" class="waves-effect {% block class_elemento_item %}{% endblock %}">Elemento</a>
                                 </li>
+{#                                <li>#}
+{#                                    <a href="#" class="waves-effect {% block class_medicao_item %}{% endblock %}">Medição</a>#}
+{#                                </li>#}
                                 <li>
-                                    <a href="#" class="waves-effect {% block class_medicao_item %}{% endblock %}">Medição</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="waves-effect {% block class_projeto_item %}{% endblock %}">Projeto</a>
+                                    <a href="{% url 'projeto' %}" class="waves-effect {% block class_projeto_item %}{% endblock %}">Projeto</a>
                                 </li>
                             </ul>
                         </div>
