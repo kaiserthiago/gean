@@ -13,8 +13,20 @@ class AuditoriaMixin(models.Model):
 
 
 class Projeto(AuditoriaMixin):
+    EM_ANDAMENTO = 1
+    SUSPENSO = 2
+    FINALIZADO = 3
+
+    SITUACAO_CHOICES = [
+        [EM_ANDAMENTO, 'Em Andamento'],
+        [SUSPENSO, 'Suspenso'],
+        [FINALIZADO, 'Finalizado']
+    ]
+
+    situacao = models.IntegerField(choices=SITUACAO_CHOICES, default=1)
     descricao = models.CharField(max_length=150, verbose_name='Descrição')
     autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='autor_set')
+    data_inicio = models.DateField()
 
 
 class Elemento(AuditoriaMixin):
