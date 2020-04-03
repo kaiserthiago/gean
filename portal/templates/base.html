@@ -30,8 +30,8 @@
 <!--Double navigation-->
 <header>
     <!-- Sidebar navigation -->
- <div id="slide-out" class="side-nav sn-bg-4">
-     <ul class="custom-scrollbar">
+    <div id="slide-out" class="side-nav sn-bg-4">
+        <ul class="custom-scrollbar">
             <!-- Logo -->
             <li>
                 <img src="{% static 'img/logo_ipen_azul_tr.png' %}" class="flex-center mt-2 mb-2"
@@ -56,19 +56,24 @@
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a href="{% url 'certificado' %}" class="waves-effect {% block class_certificado_item %}{% endblock %}">Certificado</a>
-                                </li>
-                            <li>
-                                    <a href="{% url 'dados_certificados' %}" class="waves-effect {% block class_dados_certificado_item %}{% endblock %}">Dados do Certificado</a>
+                                    <a href="{% url 'certificado' %}" class="waves-effect
+                                            {% block class_certificado_item %}{% endblock %}">Certificado</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'elemento' %}" class="waves-effect {% block class_elemento_item %}{% endblock %}">Elemento</a>
+                                    <a href="{% url 'dados_certificados' %}"
+                                       class="waves-effect {% block class_dados_certificado_item %}{% endblock %}">Dados
+                                        do Certificado</a>
                                 </li>
-{#                                <li>#}
-{#                                    <a href="#" class="waves-effect {% block class_medicao_item %}{% endblock %}">Medição</a>#}
-{#                                </li>#}
                                 <li>
-                                    <a href="{% url 'projeto' %}" class="waves-effect {% block class_projeto_item %}{% endblock %}">Projeto</a>
+                                    <a href="{% url 'elemento' %}"
+                                       class="waves-effect {% block class_elemento_item %}{% endblock %}">Elemento</a>
+                                </li>
+                                {#                                <li>#}
+                                {#                                    <a href="#" class="waves-effect {% block class_medicao_item %}{% endblock %}">Medição</a>#}
+                                {#                                </li>#}
+                                <li>
+                                    <a href="{% url 'projeto' %}"
+                                       class="waves-effect {% block class_projeto_item %}{% endblock %}">Projeto</a>
                                 </li>
                             </ul>
                         </div>
@@ -117,6 +122,14 @@
         <div class="breadcrumb-dn mr-auto">
             <p>Mestrado Gean</p>
         </div>
+        {% if not request.user.is_authenticated %}
+            <ul class="nav navbar-nav nav-flex-icons ml-auto">
+            <li class="nav-item">
+                <a href="{% url 'login' %}" class="nav-link"><i class="fa fa-lock"></i> <span
+                        class="clearfix d-none d-sm-inline-block">Login</span></a>
+            </li>
+        {% endif %}
+        </ul>
     </nav>
     <!-- /.Navbar -->
 </header>

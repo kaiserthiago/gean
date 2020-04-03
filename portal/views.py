@@ -5,7 +5,6 @@ from django.shortcuts import render
 from portal.models import Projeto, Elemento, Certificado, CertificadoElemento
 
 
-@login_required
 def home(request):
     return render(request, 'portal/home.html', {})
 
