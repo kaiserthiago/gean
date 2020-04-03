@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Create your views here.
-from portal.models import Projeto, Elemento, Certificado
+from portal.models import Projeto, Elemento, Certificado, CertificadoElemento
 
 
 @login_required
@@ -41,3 +41,13 @@ def certificado(request):
     }
 
     return render(request, 'portal/certificado.html', context)
+
+@login_required
+def dados_certificados(request):
+    dados_certificados = CertificadoElemento.objects.all()
+
+    context = {
+        'dados_certificados': dados_certificados
+    }
+
+    return render(request, 'portal/dados_certificados.html', context)
