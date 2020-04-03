@@ -23,7 +23,9 @@ class ElementoAdmin(ImportExportModelAdmin):
 
 @admin.register(CertificadoElemento)
 class CertificadoElementoAdmin(ImportExportModelAdmin):
-    pass
+    list_display = ('certificado', 'elemento', 'concentracao', 'incerteza_expandida')
+    list_filter = ('certificado__descricao', 'elemento__simbolo')
+    search_fields = ('certificado__descricao', 'elemento__simbolo')
 
 
 @admin.register(Medicao)

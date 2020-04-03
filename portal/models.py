@@ -55,8 +55,8 @@ class Certificado(AuditoriaMixin):
 class CertificadoElemento(AuditoriaMixin):
     certificado = models.ForeignKey(Certificado, on_delete=models.CASCADE)
     elemento = models.ForeignKey(Elemento, on_delete=models.CASCADE)
-    concentracao = models.DecimalField(decimal_places=5, max_digits=10, validators=[MinValueValidator(0)])
-    incerteza_expandida = models.DecimalField(decimal_places=5, max_digits=10, validators=[MinValueValidator(0)])
+    concentracao = models.DecimalField(verbose_name='Concentração', decimal_places=5, max_digits=10, validators=[MinValueValidator(0)])
+    incerteza_expandida = models.DecimalField(verbose_name='Incerteza Expandida', decimal_places=5, max_digits=10, validators=[MinValueValidator(0)])
 
     class Meta:
         verbose_name_plural = 'Dados dos Certificados'
