@@ -13,12 +13,14 @@ class ProjetoAdmin(ImportExportModelAdmin):
 
 @admin.register(Certificado)
 class CertificadoAdmin(ImportExportModelAdmin):
-    pass
+    list_display = ('descricao', 'codigo')
+    search_fields = ('descricao',)
 
 
 @admin.register(Elemento)
 class ElementoAdmin(ImportExportModelAdmin):
-    pass
+    list_display = ('descricao', 'simbolo')
+    search_fields = ('descricao',)
 
 
 @admin.register(CertificadoElemento)
