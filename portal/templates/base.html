@@ -30,8 +30,8 @@
         <ul class="custom-scrollbar">
             <!-- Logo -->
             <li>
-                    <img src="{% static 'img/logo_ipen_azul_tr.png' %}" class="flex-center mt-2 mb-2"
-                         width="90%">
+                <img src="{% static 'img/logo_ipen_azul_tr.png' %}" class="flex-center mt-2 mb-2"
+                     width="90%">
             </li>
             <!--/. Logo -->
             <li class="social">
@@ -52,42 +52,42 @@
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <a href="#" class="waves-effect
-                                            {% block class_projeto_item %}{% endblock %}">Projeto</a>
+                                    <a href="#" class="waves-effect {% block class_certificado_item %}{% endblock %}">Certificado</a>
                                 </li>
                                 <li>
-                                    <a href="#"
-                                       class="waves-effect {% block class_elemento_item %}{% endblock %}">Elemento</a>
+                                    <a href="#" class="waves-effect {% block class_elemento_item %}{% endblock %}">Elemento</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="waves-effect
-                                            {% block class_medicao_item %}{% endblock %}">Medição</a>
+                                    <a href="#" class="waves-effect {% block class_medicao_item %}{% endblock %}">Medição</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="waves-effect {% block class_projeto_item %}{% endblock %}">Projeto</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
-{#                    <li>#}
-{#                        <a class="collapsible-header waves-effect arrow-r#}
-{#                                {% block class_financeiro_menu %}{% endblock %}"><i class="fas fa-money-bill-wave"></i>#}
-{#                            Financeiro<i class="fas fa-angle-down rotate-icon"></i></a>#}
-{#                        <div class="collapsible-body">#}
-{#                            <ul>#}
-{#                                <li>#}
-{#                                    <a href="#"#}
-{#                                       class="waves-effect {% block class_despesa_item %}{% endblock %}">Despesa</a>#}
-{#                                </li>#}
-{#                                <li>#}
-{#                                    <a href="#"#}
-{#                                       class="waves-effect {% block class_receita_item %}{% endblock %}">Receita</a>#}
-{#                                </li>#}
-{#                                <li>#}
-{#                                    <a href="#"#}
-{#                                       class="waves-effect {% block class_movimento_item %}{% endblock %}">Movimento</a>#}
-{#                                </li>#}
-{#                            </ul>#}
-{#                        </div>#}
-{#                    </li>#}
+                    {#                    <li>#}
+                    {#                        <a class="collapsible-header waves-effect arrow-r#}
+                    {#                                {% block class_financeiro_menu %}{% endblock %}"><i class="fas fa-money-bill-wave"></i>#}
+                    {#                            Financeiro<i class="fas fa-angle-down rotate-icon"></i></a>#}
+                    {#                        <div class="collapsible-body">#}
+                    {#                            <ul>#}
+                    {#                                <li>#}
+                    {#                                    <a href="#"#}
+                    {#                                       class="waves-effect {% block class_despesa_item %}{% endblock %}">Despesa</a>#}
+                    {#                                </li>#}
+                    {#                                <li>#}
+                    {#                                    <a href="#"#}
+                    {#                                       class="waves-effect {% block class_receita_item %}{% endblock %}">Receita</a>#}
+                    {#                                </li>#}
+                    {#                                <li>#}
+                    {#                                    <a href="#"#}
+                    {#                                       class="waves-effect {% block class_movimento_item %}{% endblock %}">Movimento</a>#}
+                    {#                                </li>#}
+                    {#                            </ul>#}
+                    {#                        </div>#}
+                    {#                    </li>#}
 
                     <li>
                         <a href="{% url 'logout' %}" class="collapsible-header waves-effect arrow-r red-text"><i
@@ -166,7 +166,7 @@
 
                 <ul class="list-unstyled">
                     <li>
-                       Av. Tiradentes, 3009 - Setor Industrial, Porto Velho - RO, CEP 76.821-001
+                        Av. Tiradentes, 3009 - Setor Industrial, Porto Velho - RO, CEP 76.821-001
                     </li>
                     <li>
                         Fone: (69) 2182-9600
