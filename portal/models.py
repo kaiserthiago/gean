@@ -31,12 +31,13 @@ class Projeto(AuditoriaMixin):
 
 class Elemento(AuditoriaMixin):
     descricao = models.CharField(max_length=150, verbose_name='Descrição')
+    simbolo = models.CharField(max_length=2, verbose_name='Símbolo')
 
     class Meta:
         ordering = ['descricao']
 
     def __str__(self):
-        return self.descricao
+        return self.simbolo + ' - ' + self.descricao
 
 
 class Certificado(AuditoriaMixin):
