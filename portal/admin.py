@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from import_export.admin import ImportExportModelAdmin
 
-from portal.models import Projeto, Elemento, Medicao, Certificado
+from portal.models import Projeto, Elemento, Medicao, Certificado, CertificadoElemento
 
 
 @admin.register(Projeto)
@@ -18,6 +18,11 @@ class CertificadoAdmin(ImportExportModelAdmin):
 
 @admin.register(Elemento)
 class ElementoAdmin(ImportExportModelAdmin):
+    pass
+
+
+@admin.register(CertificadoElemento)
+class CertificadoElementoAdmin(ImportExportModelAdmin):
     pass
 
 
