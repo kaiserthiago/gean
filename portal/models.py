@@ -41,9 +41,13 @@ class Elemento(AuditoriaMixin):
 
 class Certificado(AuditoriaMixin):
     descricao = models.CharField(max_length=150, verbose_name='Descrição')
+    codigo = models.CharField(max_length=150, verbose_name='Código')
 
     class Meta:
         ordering = ['descricao']
+
+    def __str__(self):
+        return self.descricao + ' - ' + self.codigo
 
 
 class CertificadoElemento(AuditoriaMixin):
