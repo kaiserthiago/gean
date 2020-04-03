@@ -29,6 +29,11 @@ class Projeto(AuditoriaMixin):
     autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='autor_set')
     data_inicio = models.DateField()
 
+    class Meta:
+        ordering = ['descricao']
+        verbose_name = 'Projeto'
+        verbose_name_plural = 'Projetos'
+
 
 class Elemento(AuditoriaMixin):
     descricao = models.CharField(max_length=150, verbose_name='Descrição')
@@ -36,6 +41,8 @@ class Elemento(AuditoriaMixin):
 
     class Meta:
         ordering = ['simbolo']
+        verbose_name = 'Elemento'
+        verbose_name_plural = 'Elementos'
 
     def __str__(self):
         return self.simbolo + ' - ' + self.descricao
@@ -47,6 +54,8 @@ class Certificado(AuditoriaMixin):
 
     class Meta:
         ordering = ['descricao']
+        verbose_name = 'Certificado'
+        verbose_name_plural = 'Certificados'
 
     def __str__(self):
         return self.descricao + ' - ' + self.codigo
@@ -59,6 +68,7 @@ class CertificadoElemento(AuditoriaMixin):
     incerteza_expandida = models.DecimalField(verbose_name='Incerteza Expandida', decimal_places=5, max_digits=10, validators=[MinValueValidator(0)])
 
     class Meta:
+        verbose_name = 'Dado do Certificado'
         verbose_name_plural = 'Dados dos Certificados'
         ordering = ['certificado', 'elemento']
 
@@ -69,5 +79,6 @@ class Medicao(AuditoriaMixin):
     data = models.DateField()
 
     class Meta:
+        verbose_name = 'Medição'
         verbose_name_plural = 'Medições'
         ordering = ['-data']
