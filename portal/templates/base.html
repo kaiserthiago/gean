@@ -21,13 +21,17 @@
 
     {% endblock %}
 </head>
-<body class="fixed-sn mdb-skin">
+{% if request.user.is_authenticated %}
+    <body class="hidden-sn mdb-skin">
+{% else %}
+    <body class="mdb-skin">
+{% endif %}
 
 <!--Double navigation-->
 <header>
     <!-- Sidebar navigation -->
-    <div id="slide-out" class="side-nav sn-bg-4 fixed">
-        <ul class="custom-scrollbar">
+ <div id="slide-out" class="side-nav sn-bg-4">
+     <ul class="custom-scrollbar">
             <!-- Logo -->
             <li>
                 <img src="{% static 'img/logo_ipen_azul_tr.png' %}" class="flex-center mt-2 mb-2"
