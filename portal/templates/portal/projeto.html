@@ -19,12 +19,12 @@
             <div class="form-row">
                 <div class="col-sm-10">
                     <div class="md-form md-outline">
-                        <input id="myInput" type="text" class="form-control form-control-sm" autofocus placeholder="Digite para pesquisar"/>
+                        <input id="myInput" type="text" class="form-control" autofocus placeholder="Digite para pesquisar"/>
                         <label for="myInput" class="active">Pesquisar</label>
                     </div>
                 </div>
                 <div class="col-sm-2">
-                    <a class="float-right btn primary-color-dark white-text btn-rounded" href="">Adicionar</a>
+                    <a class="float-right btn primary-color-dark white-text btn-rounded" href="{% url 'projeto_new' %}">Adicionar</a>
                 </div>
             </div>
 
@@ -44,11 +44,11 @@
                         <tr>
                             <td>{{ projeto.descricao }}</td>
                             <td>{{ projeto.autor }}</td>
-                            <td>{{ projeto.data_inicio }}</td>
+                            <td>{{ projeto.data_inicio|date:'d/m/Y' }}</td>
                             <td>{{ projeto.get_situacao_display }}</td>
                             <td style="text-align: right; width: 8%">
-                                <a href="#"><i class="fas fa-pencil-alt mr-1 orange-text"></i></a>
-                                <a data-toggle="modal" href="#Excluir"><i class="fas fa-trash mr-1 red-text"></i></a>
+                                <a href="{% url 'projeto_edit' projeto.id %}"><i class="fas fa-pencil-alt mr-1 orange-text"></i></a>
+                                <a data-toggle="modal" href="#Excluir{{ projeto.id }}"><i class="fas fa-trash mr-1 red-text"></i></a>
                             </td>
                         </tr>
                     {% empty %}
@@ -61,4 +61,43 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block modal %}
+    {% for projeto in projetos %}
+        <!--Modal EXCLUIR-->
+        <div class="modal fade" id="Excluir{{ projeto.id }}" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-notify modal-danger" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header text-center">
+                        <h4 class="heading lead">Excluir</h4>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true" class="white-text">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{% url 'projeto_delete' projeto.id %}" method="POST">
+                        <!--Body-->
+                        <div class="modal-body text-center">
+                            {% csrf_token %}
+                            Tem certeza que deseja excluir?
+                        </div>
+                        <!--Footer-->
+                        <div class="modal-footer justify-content-center">
+                            <button type="submit" class="btn btn-danger waves-effect">Confirmar
+                            </button>
+                            <a type="button" class="btn btn-outline-danger waves-effect"
+                               data-dismiss="modal">Voltar</a>
+                        </div>
+                    </form>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+        <!--Fim Modal EXCLUIR-->
+    {% endfor %}
 {% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}Projetos{% endblock %}
+{% block class_cadastro_menu %}active{% endblock %}
+{% block class_projeto_item %}collapsible-header active{% endblock %}
+
+{% block breadcrumb_base %}
+    <ol class="breadcrumb blue-grey lighten-4">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Início</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'projeto' %}?qs={{ qs }}">Projetos</a></li>
+        <li class="breadcrumb-item active">Manipulando registro</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-4">
+        <div class="card-header grey lighten-1">
+            <p class="font-weight-bold text-uppercase mb-0">
+                Projeto
+            </p>
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="col-sm-12">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-sm-8">
+                                <div class="md-form md-outline">
+                                    <label class="active">{{ form.descricao.label }}</label>
+                                    {{ form.descricao }}
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="select-outline">
+                                    {{ form.autor }}
+                                    <label>{{ form.autor.label }}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-sm-6">
+                                <div class="md-form md-outline">
+                                    {{ form.data_inicio }}
+                                    <label class="active">{{ form.data_inicio.label }}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="select-outline">
+                                    {{ form.situacao }}
+                                    <label>{{ form.situacao.label }}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-sm-12">
+                                <div class="float-right">
+                                    <button type="submit" class="btn btn-success" data-toggle="tooltip"
+                                            data-placement="top" title="Salvar"><i class="fa fa-check"></i></button>
+                                    <a href="{% url 'projeto' %}" class="btn btn-danger"
+                                       data-toggle="tooltip" data-placement="top" title="Cancelar"><i
+                                            class="fa fa-times"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
