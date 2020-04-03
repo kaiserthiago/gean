@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -34,7 +35,7 @@ class Elemento(AuditoriaMixin):
     simbolo = models.CharField(max_length=2, verbose_name='Símbolo')
 
     class Meta:
-        ordering = ['descricao']
+        ordering = ['simbolo']
 
     def __str__(self):
         return self.simbolo + ' - ' + self.descricao
@@ -54,6 +55,12 @@ class Certificado(AuditoriaMixin):
 class CertificadoElemento(AuditoriaMixin):
     certificado = models.ForeignKey(Certificado, on_delete=models.CASCADE)
     elemento = models.ForeignKey(Elemento, on_delete=models.CASCADE)
+    concentracao = models.DecimalField(decimal_places=5, max_digits=10, validators=[MinValueValidator(0)])
+    incerteza_expandida = models.DecimalField(decimal_places=5, max_digits=10, validators=[MinValueValidator(0)])
+
+    class Meta:
+        verbose_name_plural = 'Dados dos Certificados'
+        ordering = ['certificado', 'elemento']
 
 
 class Medicao(AuditoriaMixin):
