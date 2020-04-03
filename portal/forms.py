@@ -11,6 +11,7 @@ class ProjetoForm(forms.ModelForm):
         widgets = {
             'descricao': forms.TextInput(attrs={
                 'class': 'form-control',
+                'placeholder': ' ',
                 'autofocus': '',
                 'required': ''
             }),
