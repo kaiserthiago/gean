@@ -14,7 +14,7 @@ class AuditoriaMixin(models.Model):
 
 class Projeto(AuditoriaMixin):
     descricao = models.CharField(max_length=150, verbose_name='Descrição')
-    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='autor_set')
 
 
 class Elemento(AuditoriaMixin):
@@ -28,10 +28,15 @@ class Elemento(AuditoriaMixin):
 
 
 class Certificado(AuditoriaMixin):
-    elemento = models.ManyToManyField(Elemento)
+    descricao = models.CharField(max_length=150, verbose_name='Descrição')
 
     class Meta:
-        ordering = ['elemento']
+        ordering = ['descricao']
+
+
+class CertificadoElemento(AuditoriaMixin):
+    certificado = models.ForeignKey(Certificado, on_delete=models.CASCADE)
+    elemento = models.ForeignKey(Elemento, on_delete=models.CASCADE)
 
 
 class Medicao(AuditoriaMixin):
