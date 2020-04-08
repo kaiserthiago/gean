@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from portal.models import Projeto
+from portal.models import Projeto, Elemento
 
 
 class ProjetoForm(forms.ModelForm):
@@ -45,3 +45,12 @@ class ProjetoForm(forms.ModelForm):
 
         if not data_inicio:
             raise ValidationError('Você precisa informar a data de início do projeto.')
+
+class ElementoForm(forms.ModelForm):
+    class Meta:
+        model = Elemento
+        fields = ()
+
+    def __init__(self, *args, **kwargs):
+        super(ElementoForm, self).__init__(*args, **kwargs)
+        self.fields['user'] = self.request.user

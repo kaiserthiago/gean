@@ -3,6 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from import_export.admin import ImportExportModelAdmin
 
+from portal.forms import ElementoForm
 from portal.models import Projeto, Elemento, Medicao, Certificado, CertificadoElemento
 
 
@@ -19,8 +20,10 @@ class CertificadoAdmin(ImportExportModelAdmin):
 
 @admin.register(Elemento)
 class ElementoAdmin(ImportExportModelAdmin):
-    list_display = ('descricao', 'simbolo')
+    list_display = ('descricao', 'simbolo', 'fracao_massa', 'tipo_fracao_massa')
     search_fields = ('descricao',)
+
+    # form = ElementoForm
 
 
 @admin.register(CertificadoElemento)

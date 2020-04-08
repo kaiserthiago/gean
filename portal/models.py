@@ -43,8 +43,22 @@ class Projeto(AuditoriaMixin):
 
 
 class Elemento(AuditoriaMixin):
+    PERCENTUAL = 0
+    PPM = 1
+    PPB = 2
+
+    TIPO_FRACAO = [
+        [PERCENTUAL, '%'],
+        [PPM, 'PPM'],
+        [PPB, 'PPB']
+    ]
+
     descricao = models.CharField(max_length=150, verbose_name='Descrição')
     simbolo = models.CharField(max_length=2, verbose_name='Símbolo')
+    fracao_massa = models.DecimalField(verbose_name='Fração de massa', decimal_places=10, max_digits=15,
+                                       validators=[MinValueValidator(0)], default=0)
+    tipo_fracao_massa = models.IntegerField(choices=TIPO_FRACAO, default=0)
+
 
     class Meta:
         ordering = ['simbolo']
