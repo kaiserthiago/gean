@@ -34,6 +34,8 @@
                     <tr>
                         <th scope="col">Descrição</th>
                         <th scope="col">Símbolo</th>
+                        <th scope="col">Fração de Massa</th>
+                        <th scope="col">Unidade da Fração</th>
 {#                        <th scope="col" style="text-align: right; width: 8%">Ações</th>#}
                     </tr>
                     </thead>
@@ -42,6 +44,8 @@
                         <tr>
                             <td>{{ elemento.descricao }}</td>
                             <td>{{ elemento.simbolo }}</td>
+                            <td>{{ elemento.fracao_massa }}</td>
+                            <td>{{ elemento.get_tipo_fracao_massa_display }}</td>
 {#                            <td style="text-align: right; width: 8%">#}
 {#                                <a href="#"><i class="fas fa-pencil-alt mr-1 orange-text"></i></a>#}
 {#                                <a data-toggle="modal" href="#Excluir"><i class="fas fa-trash mr-1 red-text"></i></a>#}
