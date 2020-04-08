@@ -43,21 +43,9 @@ class Projeto(AuditoriaMixin):
 
 
 class Elemento(AuditoriaMixin):
-    PERCENTUAL = 0
-    PPM = 1
-    PPB = 2
-
-    TIPO_FRACAO = [
-        [PERCENTUAL, '%'],
-        [PPM, 'PPM'],
-        [PPB, 'PPB']
-    ]
-
     descricao = models.CharField(max_length=150, verbose_name='Descrição')
     simbolo = models.CharField(max_length=2, verbose_name='Símbolo')
-    fracao_massa = models.DecimalField(verbose_name='Fração de massa', decimal_places=10, max_digits=15,
-                                       validators=[MinValueValidator(0)], default=0)
-    tipo_fracao_massa = models.IntegerField(choices=TIPO_FRACAO, default=0)
+
 
 
     class Meta:
@@ -83,12 +71,25 @@ class Certificado(AuditoriaMixin):
 
 
 class CertificadoElemento(AuditoriaMixin):
+    PERCENTUAL = 0
+    PPM = 1
+    PPB = 2
+
+    TIPO_FRACAO = [
+        [PERCENTUAL, '%'],
+        [PPM, 'PPM'],
+        [PPB, 'PPB']
+    ]
+
     certificado = models.ForeignKey(Certificado, on_delete=models.CASCADE)
     elemento = models.ForeignKey(Elemento, on_delete=models.CASCADE)
     concentracao = models.DecimalField(verbose_name='Concentração', decimal_places=5, max_digits=10,
                                        validators=[MinValueValidator(0)])
     incerteza_expandida = models.DecimalField(verbose_name='Incerteza Expandida', decimal_places=5, max_digits=10,
                                               validators=[MinValueValidator(0)])
+    fracao_massa = models.DecimalField(verbose_name='Fração de massa', decimal_places=10, max_digits=15,
+                                       validators=[MinValueValidator(0)], default=0)
+    tipo_fracao_massa = models.IntegerField(choices=TIPO_FRACAO, default=0)
 
     class Meta:
         verbose_name = 'Dado do Certificado'

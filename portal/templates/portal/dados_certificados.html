@@ -36,6 +36,8 @@
                         <th scope="col">Elemento</th>
                         <th scope="col" style="text-align: right">Concentração</th>
                         <th scope="col" style="text-align: right">Incerteza Expandida</th>
+                        <th scope="col" style="text-align: right">Fração de Massa</th>
+                        <th scope="col" style="text-align: right">Unidade da Fração</th>
 {#                        <th scope="col" style="text-align: right; width: 8%">Ações</th>#}
                     </tr>
                     </thead>
@@ -46,6 +48,8 @@
                             <td>{{ dados.elemento }}</td>
                             <td style="text-align: right">{{ dados.concentracao }}</td>
                             <td style="text-align: right">{{ dados.incerteza_expandida }}</td>
+                            <td style="text-align: right">{{ dados.fracao_massa }}</td>
+                            <td style="text-align: right">{{ dados.get_tipo_fracao_massa_display }}</td>
 {#                            <td style="text-align: right; width: 8%">#}
 {#                                <a href="#"><i class="fas fa-pencil-alt mr-1 orange-text"></i></a>#}
 {#                                <a data-toggle="modal" href="#Excluir"><i class="fas fa-trash mr-1 red-text"></i></a>#}
@@ -53,7 +57,7 @@
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="4" class="alert alert-warning">Não há dados de certificados cadastrados</td>
+                            <td colspan="6" class="alert alert-warning">Não há dados de certificados cadastrados</td>
                         </tr>
                     {% endfor %}
                     </tbody>

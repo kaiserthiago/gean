@@ -20,7 +20,7 @@ class CertificadoAdmin(ImportExportModelAdmin):
 
 @admin.register(Elemento)
 class ElementoAdmin(ImportExportModelAdmin):
-    list_display = ('descricao', 'simbolo', 'fracao_massa', 'tipo_fracao_massa')
+    list_display = ('descricao', 'simbolo')
     search_fields = ('descricao',)
 
     # form = ElementoForm
@@ -28,7 +28,7 @@ class ElementoAdmin(ImportExportModelAdmin):
 
 @admin.register(CertificadoElemento)
 class CertificadoElementoAdmin(ImportExportModelAdmin):
-    list_display = ('certificado', 'elemento', 'concentracao', 'incerteza_expandida')
+    list_display = ('certificado', 'elemento', 'concentracao', 'incerteza_expandida', 'fracao_massa', 'tipo_fracao_massa')
     list_filter = ('certificado__descricao', 'elemento__simbolo')
     search_fields = ('certificado__descricao', 'elemento__simbolo')
 
