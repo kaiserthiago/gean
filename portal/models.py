@@ -105,9 +105,25 @@ class Medicao(AuditoriaMixin):
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
     dados_elemento = models.ForeignKey(CertificadoElemento, on_delete=models.CASCADE)
     data = models.DateField()
-    concentracao_medicao = models.DecimalField(verbose_name='Concentração Médição', decimal_places=5, max_digits=10,
-                                       validators=[MinValueValidator(0)], default=0)
+    concentracao_medicao = models.DecimalField(verbose_name='Concentração da Medição', decimal_places=5, max_digits=10,
+                                               validators=[MinValueValidator(0)], default=0)
+    incerteza_padrao_medicao = models.DecimalField(verbose_name='Incerteza Padrão da Medição', decimal_places=5,
+                                                   max_digits=10,
+                                                   validators=[MinValueValidator(0)], default=0, null=True, blank=True)
+    incerteza_expandida_medicao = models.DecimalField(verbose_name='Incerteza Expandida da Medição', decimal_places=5,
+                                                      max_digits=10,
+                                                      validators=[MinValueValidator(0)], default=0, null=True,
+                                                      blank=True)
+    incerteza_expandida_combinada = models.DecimalField(verbose_name='Incerteza Expandida Combinada da Medição',
+                                                        decimal_places=5,
+                                                        max_digits=10,
+                                                        validators=[MinValueValidator(0)], default=0, null=True,
+                                                        blank=True)
+
     class Meta:
         verbose_name = 'Medição'
         verbose_name_plural = 'Medições'
         ordering = ['-data']
+
+    def __str__(self):
+        return self.projeto.descricao + ' - ' + self.dados_elemento.elemento.simbolo + ' - ' + self.dados_elemento.certificado.codigo
