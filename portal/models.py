@@ -105,7 +105,8 @@ class Medicao(AuditoriaMixin):
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
     dados_elemento = models.ForeignKey(CertificadoElemento, on_delete=models.CASCADE)
     data = models.DateField()
-
+    concentracao_medicao = models.DecimalField(verbose_name='Concentração Médição', decimal_places=5, max_digits=10,
+                                       validators=[MinValueValidator(0)], default=0)
     class Meta:
         verbose_name = 'Medição'
         verbose_name_plural = 'Medições'
