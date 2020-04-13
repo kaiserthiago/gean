@@ -47,6 +47,7 @@ class CertificadoElementoAdmin(ImportExportModelAdmin):
 class MedicaoAdmin(ImportExportModelAdmin):
     list_display = (
         'id',
+        'descricao',
         'projeto',
         'dados_elemento',
         'tipo_incerteza',
