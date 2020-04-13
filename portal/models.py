@@ -41,6 +41,9 @@ class Projeto(AuditoriaMixin):
         verbose_name = 'Projeto'
         verbose_name_plural = 'Projetos'
 
+    def __str__(self):
+        return self.descricao
+
 
 class Elemento(AuditoriaMixin):
     descricao = models.CharField(max_length=150, verbose_name='Descrição')
@@ -96,10 +99,12 @@ class CertificadoElemento(AuditoriaMixin):
         verbose_name_plural = 'Dados dos Certificados'
         ordering = ['certificado', 'elemento']
 
+    def __str__(self):
+        return str(self.elemento) + ' - ' + str(self.certificado)
 
 class Medicao(AuditoriaMixin):
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
-    elemento = models.ForeignKey(Elemento, on_delete=models.CASCADE)
+    dados_elemento = models.ForeignKey(CertificadoElemento, on_delete=models.CASCADE)
     data = models.DateField()
 
     class Meta:

@@ -35,4 +35,6 @@ class CertificadoElementoAdmin(ImportExportModelAdmin):
 
 @admin.register(Medicao)
 class MedicaoAdmin(ImportExportModelAdmin):
-    pass
+    list_display = ('id', 'projeto', 'dados_elemento', 'data')
+    list_filter = ('projeto', 'dados_elemento__elemento')
+
