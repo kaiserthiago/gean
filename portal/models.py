@@ -128,20 +128,22 @@ class Medicao(AuditoriaMixin):
     dados_elemento = models.ForeignKey(CertificadoElemento, on_delete=models.CASCADE)
     tipo_incerteza = models.IntegerField(choices=TIPO_INCERTEZA, default=0)
     data = models.DateField()
-    concentracao_medicao = models.DecimalField(verbose_name='Concentração da Medição', decimal_places=5, max_digits=10,
-                                               validators=[MinValueValidator(0)], default=0)
-    incerteza_padrao_medicao = models.DecimalField(verbose_name='Incerteza Padrão da Medição', decimal_places=5,
+    concentracao_medicao = models.DecimalField(verbose_name='Concentração', decimal_places=5, max_digits=10,
+                                               validators=[MinValueValidator(0)], default=0,
+                                               help_text='Dados da medição')
+    incerteza_padrao_medicao = models.DecimalField(verbose_name='Incerteza Padrão', decimal_places=5,
                                                    max_digits=10,
-                                                   validators=[MinValueValidator(0)], default=0, null=True, blank=True)
-    incerteza_expandida_medicao = models.DecimalField(verbose_name='Incerteza Expandida da Medição', decimal_places=5,
+                                                   validators=[MinValueValidator(0)], default=0, null=True, blank=True,
+                                                   help_text='Dados da medição')
+    incerteza_expandida_medicao = models.DecimalField(verbose_name='Incerteza Expandida', decimal_places=5,
                                                       max_digits=10,
                                                       validators=[MinValueValidator(0)], default=0, null=True,
-                                                      blank=True)
-    incerteza_expandida_combinada = models.DecimalField(verbose_name='Incerteza Expandida Combinada da Medição',
+                                                      blank=True, help_text='Dados da medição')
+    incerteza_expandida_combinada = models.DecimalField(verbose_name='Incerteza Expandida Combinada',
                                                         decimal_places=5,
                                                         max_digits=10,
                                                         validators=[MinValueValidator(0)], default=0, null=True,
-                                                        blank=True)
+                                                        blank=True, help_text='Dados da medição')
 
     class Meta:
         verbose_name = 'Medição'
