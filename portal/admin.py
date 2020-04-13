@@ -28,7 +28,17 @@ class ElementoAdmin(ImportExportModelAdmin):
 
 @admin.register(CertificadoElemento)
 class CertificadoElementoAdmin(ImportExportModelAdmin):
-    list_display = ('certificado', 'elemento', 'concentracao', 'incerteza_expandida', 'fracao_massa', 'tipo_fracao_massa')
+    list_display = (
+        'certificado',
+        'elemento',
+        'concentracao',
+        'incerteza_expandida',
+        'incerteza_padrao',
+        'incerteza_confianca',
+        'incerteza_combinada',
+        'fracao_massa',
+        'tipo_fracao_massa'
+    )
     list_filter = ('certificado__descricao', 'elemento__simbolo')
     search_fields = ('certificado__descricao', 'elemento__simbolo')
 
@@ -46,4 +56,3 @@ class MedicaoAdmin(ImportExportModelAdmin):
         'data'
     )
     list_filter = ('projeto', 'dados_elemento__elemento')
-
