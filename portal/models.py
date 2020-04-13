@@ -107,7 +107,7 @@ class CertificadoElemento(AuditoriaMixin):
         ordering = ['elemento', 'certificado']
 
     def __str__(self):
-        return str(self.elemento) + ' - ' + str(self.certificado)
+        return str(self.elemento) + ' - ' + str(self.certificado.codigo)
 
 
 class Medicao(AuditoriaMixin):
