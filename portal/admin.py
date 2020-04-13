@@ -49,10 +49,13 @@ class MedicaoAdmin(ImportExportModelAdmin):
         'id',
         'projeto',
         'dados_elemento',
+        'tipo_incerteza',
         'concentracao_medicao',
         'incerteza_padrao_medicao',
         'incerteza_expandida_medicao',
         'incerteza_expandida_combinada',
         'data'
     )
-    list_filter = ('projeto', 'dados_elemento__elemento')
+    list_filter = ('projeto',
+                   'dados_elemento__elemento',
+                   'dados_elemento__certificado__codigo')

@@ -111,8 +111,22 @@ class CertificadoElemento(AuditoriaMixin):
 
 
 class Medicao(AuditoriaMixin):
+    EXPANDIDA = 0
+    PADRAO = 1
+    CONFIANCA = 2
+    COMBINADA = 3
+
+    TIPO_INCERTEZA = [
+        [EXPANDIDA, 'Expandida'],
+        [PADRAO, 'Padrão'],
+        [CONFIANCA, 'Confiança'],
+        [COMBINADA, 'Combinada']
+    ]
+
+    descricao = models.CharField(max_length=150, verbose_name='Descrição')
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
     dados_elemento = models.ForeignKey(CertificadoElemento, on_delete=models.CASCADE)
+    tipo_incerteza = models.IntegerField(choices=TIPO_INCERTEZA, default=0)
     data = models.DateField()
     concentracao_medicao = models.DecimalField(verbose_name='Concentração da Medição', decimal_places=5, max_digits=10,
                                                validators=[MinValueValidator(0)], default=0)
