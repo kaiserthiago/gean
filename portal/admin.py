@@ -56,6 +56,11 @@ class MedicaoAdmin(ImportExportModelAdmin):
         'incerteza_expandida_combinada',
         'data'
     )
-    list_filter = ('projeto',
-                   'dados_elemento__elemento',
-                   'dados_elemento__certificado__codigo')
+
+    list_filter = (
+        'projeto',
+        'dados_elemento__elemento',
+        'dados_elemento__certificado__codigo'
+    )
+
+    search_fields = ['descricao', ]
