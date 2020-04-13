@@ -14,7 +14,7 @@ User.add_to_class("__str__", get_user_name)
 class AuditoriaMixin(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True, null=True)
-    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
 
     class Meta:
         abstract = True
