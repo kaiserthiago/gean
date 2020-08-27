@@ -31,6 +31,7 @@ class CertificadoElementoAdmin(ImportExportModelAdmin):
     list_display = (
         'certificado',
         'elemento',
+        'tipo_concentracao',
         'concentracao',
         'incerteza_expandida',
         'incerteza_padrao',
