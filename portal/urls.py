@@ -14,4 +14,6 @@ urlpatterns = [
     url(r'^projeto/edit/(?P<projeto_id>\d+)$', views.projeto_edit, name='projeto_edit'),
     url(r'^projeto/new$', views.projeto_new, name='projeto_new'),
     url(r'^projeto$', views.projeto, name='projeto'),
+
+    url(r'^medicao/delete/(?P<medicao_id>\d+)/(?P<projeto_id>\d+)$', views.medicao_delete, name='medicao_delete'),
 ]

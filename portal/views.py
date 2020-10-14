@@ -19,6 +19,16 @@ def home(request):
 
 
 @login_required
+def medicao_delete(request, medicao_id, projeto_id):
+    medicao = get_object_or_404(Medicao, pk=medicao_id)
+
+    if request.method == 'POST':
+        medicao.delete()
+        messages.success(request, 'Medição excluída.')
+
+    return redirect('projeto_visualizar', projeto_id)
+
+@login_required
 def projeto_importar(request, projeto_id):
     projeto = get_object_or_404(Projeto, id=projeto_id)
     certificados = Certificado.objects.all()
