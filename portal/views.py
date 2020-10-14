@@ -2,6 +2,7 @@ import datetime
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Avg, Count
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -10,6 +11,7 @@ from tablib import Dataset
 
 from portal.forms import ProjetoForm
 from portal.models import Projeto, Elemento, Certificado, CertificadoElemento, Medicao
+import statistics
 
 
 def home(request):
@@ -26,7 +28,6 @@ def projeto_importar(request, projeto_id):
         datetime.datetime.today().strftime('%d'),
     )
     data_inicial = inicio[8:10] + '/' + inicio[5:7] + '/' + inicio[0:4]
-
 
     if request.method == 'POST':
         # PEGA A DATA DO FORM
@@ -95,11 +96,43 @@ def projeto_importar(request, projeto_id):
 def projeto_visualizar(request, projeto_id):
     projeto = get_object_or_404(Projeto, id=projeto_id)
 
+    media_concentracao = Medicao.objects.filter(projeto=projeto).order_by(
+        'dados_elemento__elemento__simbolo').values(
+        'dados_elemento__elemento__simbolo', 'dados_elemento__concentracao', 'dados_elemento__incerteza_expandida').annotate(concentracao=Avg('concentracao_medicao'),
+                                                      incerteza_padrao=Avg('incerteza_padrao_medicao'), total=Count('id')).distinct()
+
+    elementos = Medicao.objects.filter(projeto=projeto).order_by(
+        'dados_elemento__elemento__simbolo').values_list(
+        'dados_elemento__elemento__simbolo').annotate().distinct()
+    lista_elementos = []
+    lista_concentracao_medicao = []
+    mediana = {}
+    desvio_padrao = {}
+    variancia = {}
+
+    for elemento in elementos:
+        lista_elementos = [obj[0] for obj in elementos]
+
+    for i in lista_elementos:
+        valores = Medicao.objects.filter(dados_elemento__elemento__simbolo=i)
+
+        for valor in valores:
+            lista_concentracao_medicao.append(valor.concentracao_medicao)
+
+        mediana[i] = float(statistics.median(lista_concentracao_medicao))
+        desvio_padrao[i] = float(statistics.pstdev(lista_concentracao_medicao))
+        variancia[i] = float(statistics.pvariance(lista_concentracao_medicao))
+
     context = {
         'projeto': projeto,
+        'media_concentracao': media_concentracao,
+        'mediana': mediana,
+        'desvio_padrao': desvio_padrao,
+        'variancia': variancia,
     }
 
     return render(request, 'portal/projeto_visualizar.html', context)
+
 
 @login_required
 def projeto(request):

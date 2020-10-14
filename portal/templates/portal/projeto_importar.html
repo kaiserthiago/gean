@@ -72,7 +72,7 @@
                                 searchable="Pesquisar">
                             <option value="" disabled selected>Selecione o certificado</option>
                             {% for certificado in certificados %}
-                                <option value="{{ certificado.id }}">{{ certificado.descricao }}</option>
+                                <option value="{{ certificado.id }}">{{ certificado.codigo }}</option>
                             {% endfor %}
                         </select>
                         <label class="font-weight-bold" data-error="wrong" data-success="right">
