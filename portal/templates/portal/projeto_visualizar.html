@@ -61,12 +61,12 @@
                     <tr>
 
                         <th scope="col" class="font-weight-bold" style="text-align: center;">X</th>
+                        <th scope="col" class="font-weight-bold" style="text-align: center;">Y</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">DP</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">DA</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">DPR (%)</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Er (%)</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Z</th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">Média Incerteza Padrão</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Mediana</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Variância</th>
 
@@ -80,6 +80,7 @@
                             <td style="text-align: center">{{ media.dados_elemento__elemento__simbolo }}</td>
                             <td style="text-align: center">{{ media.total }}</td>
                             <td style="text-align: center">{{ media.concentracao|floatformat:4 }}</td>
+                            <td style="text-align: center">{{ media.incerteza_padrao|floatformat:4 }}</td>
 
                             {% for elemento, valor in desvio_padrao.items %}
                                 {% if elemento == media.dados_elemento__elemento__simbolo %}
@@ -92,7 +93,6 @@
                             <td style="text-align: center">{% er media.concentracao media.dados_elemento__concentracao %}</td>
                             <td style="text-align: center">{% z_score media.concentracao media.dados_elemento__concentracao media.dados_elemento__incerteza_expandida %}</td>
 
-                            <td style="text-align: center">{{ media.incerteza_padrao|floatformat:4 }}</td>
 
                             {% for elemento, valor in mediana.items %}
                                 {% if elemento == media.dados_elemento__elemento__simbolo %}
@@ -117,7 +117,7 @@
             <hr>
 
             <p class="font-small">
-                N = Número de Determinações; X = Valor Médio; DA = Diferença Absoluta; DP = Desvio Padrão; DPR(%) =
+                N = Número de Determinações; X = Valor Médio; Y = Incerteza Padrão Média; DA = Diferença Absoluta; DP = Desvio Padrão; DPR(%) =
                 Desvio Padrão Relativo; Er(%) = Erro Relativo Percentual; Z = Índice Z
             </p>
         </div>
