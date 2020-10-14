@@ -2,6 +2,7 @@
 {% block title %}Projetos{% endblock %}
 {% block class_cadastro_menu %}active{% endblock %}
 {% block class_projeto_item %}collapsible-header active{% endblock %}
+{% load static %}
 
 {% block breadcrumb_base %}
     <ol class="breadcrumb blue-grey lighten-4">
@@ -49,7 +50,9 @@
         </div>
         <div class="card-body">
             <div class="note note-success">
-                <strong>Info:</strong> Importe seus dados a partir de um arquivo de Planilha Eletrônica.
+                <a href="{% static 'data/modelo.xlsx' %}" class="black-text">
+                    <strong>Info:</strong> Clique aqui para fazer o download de nossa Planilha Modelo.
+                </a>
             </div>
             <form method="POST" enctype="multipart/form-data" class="md-form" onsubmit='disableButton()'>
                 {% csrf_token %}
