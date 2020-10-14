@@ -49,14 +49,45 @@
         </div>
         <div class="card-body">
             <div class="note note-success">
-               <strong>Info:</strong> Importe seus dados a partir de um arquivo de Planilha Eletrônica.
+                <strong>Info:</strong> Importe seus dados a partir de um arquivo de Planilha Eletrônica.
             </div>
-            <div class="form-row">
-                <div class="col-sm-12">
-                    <form method="POST" enctype="multipart/form-data" class="md-form" onsubmit='disableButton()'>
-                        {% csrf_token %}
+            <form method="POST" enctype="multipart/form-data" class="md-form" onsubmit='disableButton()'>
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-6 select-outline">
+                        <select name="certificado" id="id_certificado"
+                                class="mdb-select md-form md-outline colorful-select dropdown-primary" required
+                                searchable="Pesquisar">
+                            <option value="" disabled selected>Selecione o Certificado</option>
+                            {% for certificado in certificados %}
+                                <option value="{{ certificado.id }}">{{ certificado.descricao }}</option>
+                            {% endfor %}
+                        </select>
+                        <label class="font-weight-bold" data-error="wrong" data-success="right">
+                            Certificado <span class="red-text font-weight-bold">*</span>
+                        </label>
+                    </div>
+
+                    <div class="col-sm-6 select-outline">
+                        <select name="tipo_incerteza" id="id_tipo_incerteza"
+                                class="mdb-select md-form md-outline colorful-select dropdown-primary" required>
+                            <option value="" disabled selected>Selecione o Tipo de Incerteza</option>
+                            <option value="Combinada">Combinada</option>
+                            <option value="Confiança">Confiança</option>
+                            <option value="Expandida">Expandida</option>
+                            <option value="Padrão">Padrão</option>
+                        </select>
+                        <label class="font-weight-bold" data-error="wrong" data-success="right">
+                            Tipo de Incerteza <span class="red-text font-weight-bold">*</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-sm-12">
                         <div class="file-field">
-                            <div class="btn btn-primary">
+                            <p></p>
+                            <div class="btn btn-indigo float-left">
                                 <span>Selecionar arquivo</span>
                                 <input type="file" name="myfile" required readonly>
                             </div>
@@ -65,20 +96,21 @@
                                        placeholder="Escolha o arquivo" readonly>
                             </div>
                         </div>
-
-                        <div class="form-row">
-                            <div class="col-sm-12">
-                                <div class="float-right">
-                                    <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> Importar</button>
-                                    <a href="{% url 'projeto' %}" class="btn btn-danger"><i
-                                            class="fa fa-times-circle"></i> Cancelar</a>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
                 </div>
-                </form>
-            </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="float-right">
+                            <button type="submit" class="btn btn-success"><i class="fa fa-download"></i>
+                                Importar
+                            </button>
+                            <a href="{% url 'projeto' %}" class="btn btn-danger"><i
+                                    class="fa fa-times-circle"></i> Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-    </div>
     </div>
 {% endblock %}

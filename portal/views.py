@@ -16,8 +16,13 @@ def home(request):
 @login_required
 def projeto_importar(request, projeto_id):
     projeto = get_object_or_404(Projeto, id=projeto_id)
+    certificados = Certificado.objects.all()
 
     if request.method == 'POST':
+        # BUSCA DOS DADOS DO CERTIFICADO
+        dados = CertificadoElemento.objects.filter(certificado_id=request.POST['certificado'])
+
+        # CARREGA OS DADOS DO XLS
         dataset = Dataset()
         new_persons = request.FILES['myfile']
 
@@ -58,7 +63,8 @@ def projeto_importar(request, projeto_id):
         messages.success(request, 'Dados importados com sucesso')
 
     context = {
-        'projeto': projeto
+        'projeto': projeto,
+        'certificados': certificados
     }
 
     return render(request, 'portal/projeto_importar.html', context)
