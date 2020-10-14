@@ -64,10 +64,37 @@ def er(media_concentracao, referencia):
     c = b.replace('.', ',')
     return c.replace('v', '.')
 
+
+@register.simple_tag(name='en')
+def en(media_concentracao, referencia_concentracao, media_incerteza, referencia_incerteza):
+    if referencia_incerteza:
+        resultado = float(
+            (float(media_concentracao) - float(referencia_concentracao)) / ((float(media_incerteza)**2)+(float(referencia_incerteza)**2)**float(0.5))
+        )
+        a = '{:,.4f}'.format(resultado)
+        b = a.replace(',', 'v')
+        c = b.replace('.', ',')
+        return c.replace('v', '.')
+    else:
+        return '-'
+
 @register.simple_tag(name='z_score')
 def z_score(media_concentracao, referencia_concentracao, referencia_incerteza):
     if referencia_incerteza:
         resultado = float(((media_concentracao - referencia_concentracao)/referencia_incerteza))
+        a = '{:,.4f}'.format(resultado)
+        b = a.replace(',', 'v')
+        c = b.replace('.', ',')
+        return c.replace('v', '.')
+    else:
+        return '-'
+
+@register.simple_tag(name='zeta_score')
+def zeta_score(media_concentracao, referencia_concentracao, media_incerteza, referencia_incerteza_padrao):
+    if referencia_incerteza_padrao:
+        resultado = float(
+            (float(media_concentracao) - float(referencia_concentracao)) / ((float(media_incerteza)**2)+(float(referencia_incerteza_padrao)**2)**float(0.5))
+        )
         a = '{:,.4f}'.format(resultado)
         b = a.replace(',', 'v')
         c = b.replace('.', ',')

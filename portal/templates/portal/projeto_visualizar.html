@@ -59,7 +59,7 @@
                         <th scope="col" class="font-weight-bold" style="text-align: center; vertical-align: middle"
                             rowspan="2">N
                         </th>
-                        <th scope="col" colspan="9" class="font-weight-bold text-center">Valores Recalculados do
+                        <th scope="col" colspan="11" class="font-weight-bold text-center">Valores Recalculados do
                             Conjunto de Dados
                         </th>
                         <th scope="col" colspan="2" class="font-weight-bold text-center">Certificado</th>
@@ -72,7 +72,9 @@
                         <th scope="col" class="font-weight-bold" style="text-align: center;">DA</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">DPR (%)</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Er (%)</th>
+                        <th scope="col" class="font-weight-bold" style="text-align: center;">En</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Z</th>
+                        <th scope="col" class="font-weight-bold" style="text-align: center;">Zeta</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Mediana</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Variância</th>
 
@@ -97,7 +99,9 @@
                             <td style="text-align: center">{% diferenca_absoluta media.concentracao media.dados_elemento__concentracao %}</td>
                             <td style="text-align: center">{% dpr media.incerteza_padrao media.concentracao %}</td>
                             <td style="text-align: center">{% er media.concentracao media.dados_elemento__concentracao %}</td>
+                            <td style="text-align: center">{% en media.concentracao media.dados_elemento__concentracao media.incerteza_padrao media.dados_elemento__incerteza_expandida %}</td>
                             <td style="text-align: center">{% z_score media.concentracao media.dados_elemento__concentracao media.dados_elemento__incerteza_expandida %}</td>
+                            <td style="text-align: center">{% zeta_score media.concentracao media.dados_elemento__concentracao media.incerteza_padrao media.dados_elemento__incerteza_padrao %}</td>
 
 
                             {% for elemento, valor in mediana.items %}
@@ -125,7 +129,7 @@
             <p class="font-small">
                 N = Número de Determinações; X = Valor Médio; Y = Incerteza Padrão Média; DA = Diferença Absoluta; DP =
                 Desvio Padrão; DPR(%) =
-                Desvio Padrão Relativo; Er(%) = Erro Relativo Percentual; Z = Índice Z
+                Desvio Padrão Relativo; Er(%) = Erro Relativo Percentual; En = Erro Normalizado; Z = Índice Z; Zeta = Índice Zeta
             </p>
         </div>
     </div>
