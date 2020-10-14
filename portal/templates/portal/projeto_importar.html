@@ -25,13 +25,13 @@
                         <span class="font-weight-bold">Autor: </span> {{ projeto.autor }}
                     </td>
                     <td>
-                        <span class="font-weight-bold"> Início: </span> {{ projeto.data_inicio }}
+                        <span class="font-weight-bold">Início: </span> {{ projeto.data_inicio }}
                     </td>
 
                 </tr>
                 <tr>
                     <td>
-                        <span class="font-weight-bold"> Descrição: </span> {{ projeto.descricao }}
+                        <span class="font-weight-bold">Descrição: </span> {{ projeto.descricao }}
                     </td>
                     <td>
                         <span class="font-weight-bold">Situação: </span> {{ projeto.get_situacao_display }}
@@ -54,31 +54,29 @@
             <form method="POST" enctype="multipart/form-data" class="md-form" onsubmit='disableButton()'>
                 {% csrf_token %}
                 <div class="row">
-                    <div class="col-sm-6 select-outline">
+                    <div class="col-sm-4">
+                        <div class="md-form md-outline input-group">
+                            <input type="text" placeholder="Clique para selecionar"
+                                   class="form-control datepicker text-center"
+                                   name="data"
+                                   id="id_data" value={{ data_inicial }}>
+                            <label class="active font-weight-bold">
+                                Data <span class="red-text font-weight-bold">*</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-8 select-outline">
                         <select name="certificado" id="id_certificado"
                                 class="mdb-select md-form md-outline colorful-select dropdown-primary" required
                                 searchable="Pesquisar">
-                            <option value="" disabled selected>Selecione o Certificado</option>
+                            <option value="" disabled selected>Selecione o certificado</option>
                             {% for certificado in certificados %}
                                 <option value="{{ certificado.id }}">{{ certificado.descricao }}</option>
                             {% endfor %}
                         </select>
                         <label class="font-weight-bold" data-error="wrong" data-success="right">
                             Certificado <span class="red-text font-weight-bold">*</span>
-                        </label>
-                    </div>
-
-                    <div class="col-sm-6 select-outline">
-                        <select name="tipo_incerteza" id="id_tipo_incerteza"
-                                class="mdb-select md-form md-outline colorful-select dropdown-primary" required>
-                            <option value="" disabled selected>Selecione o Tipo de Incerteza</option>
-                            <option value="Combinada">Combinada</option>
-                            <option value="Confiança">Confiança</option>
-                            <option value="Expandida">Expandida</option>
-                            <option value="Padrão">Padrão</option>
-                        </select>
-                        <label class="font-weight-bold" data-error="wrong" data-success="right">
-                            Tipo de Incerteza <span class="red-text font-weight-bold">*</span>
                         </label>
                     </div>
                 </div>
@@ -93,7 +91,7 @@
                             </div>
                             <div class="file-path-wrapper">
                                 <input type="text" class="file-path validate" name="myfile"
-                                       placeholder="Escolha o arquivo" readonly>
+                                       placeholder="Escolha o arquivo" required readonly>
                             </div>
                         </div>
                     </div>

@@ -44,6 +44,9 @@ class Projeto(AuditoriaMixin):
     def __str__(self):
         return self.descricao
 
+    @property
+    def get_medicoes(self):
+        return self.medicao_set.filter(projeto=self).order_by('dados_elemento__elemento__simbolo')
 
 class Elemento(AuditoriaMixin):
     descricao = models.CharField(max_length=150, verbose_name='Descrição')
@@ -100,10 +103,10 @@ class CertificadoElemento(AuditoriaMixin):
     incerteza_padrao = models.DecimalField(verbose_name='Incerteza Padrão', decimal_places=5,
                                            max_digits=10,
                                            validators=[MinValueValidator(0)], default=0, null=True, blank=True)
-    incerteza_confianca = models.DecimalField(verbose_name='Incerteza Confiança', decimal_places=5,
+    incerteza_combinada = models.DecimalField(verbose_name='Incerteza Combinada', decimal_places=5,
                                               max_digits=10,
                                               validators=[MinValueValidator(0)], default=0, null=True, blank=True)
-    incerteza_combinada = models.DecimalField(verbose_name='Incerteza Combinada', decimal_places=5,
+    intervalo_confianca = models.DecimalField(verbose_name='Intervalo de Confiança', decimal_places=5,
                                               max_digits=10,
                                               validators=[MinValueValidator(0)], default=0, null=True, blank=True)
     fracao_massa = models.DecimalField(verbose_name='Fração de massa', decimal_places=10, max_digits=15,
@@ -126,13 +129,12 @@ class Medicao(AuditoriaMixin):
     COMBINADA = 3
 
     TIPO_INCERTEZA = [
-        [EXPANDIDA, 'Expandida'],
-        [PADRAO, 'Padrão'],
-        [CONFIANCA, 'Confiança'],
-        [COMBINADA, 'Combinada']
+        [CONFIANCA, 'Intervalo de Confiança'],
+        [COMBINADA, 'Incerteza Combinada'],
+        [EXPANDIDA, 'Incerteza Expandida'],
+        [PADRAO, 'Incerteza Padrão'],
     ]
 
-    descricao = models.CharField(max_length=150, verbose_name='Descrição')
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE)
     dados_elemento = models.ForeignKey(CertificadoElemento, on_delete=models.CASCADE)
     tipo_incerteza = models.IntegerField(choices=TIPO_INCERTEZA, default=0)
@@ -149,6 +151,11 @@ class Medicao(AuditoriaMixin):
                                                       validators=[MinValueValidator(0)], default=0, null=True,
                                                       blank=True, help_text='Dados da medição')
     incerteza_expandida_combinada = models.DecimalField(verbose_name='Incerteza Expandida Combinada',
+                                                        decimal_places=5,
+                                                        max_digits=10,
+                                                        validators=[MinValueValidator(0)], default=0, null=True,
+                                                        blank=True, help_text='Dados da medição')
+    intervalo_confianca_medicao = models.DecimalField(verbose_name='Intervalo de Confiança',
                                                         decimal_places=5,
                                                         max_digits=10,
                                                         validators=[MinValueValidator(0)], default=0, null=True,

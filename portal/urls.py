@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^certificado$', views.certificado, name='certificado'),
     url(r'^elemento$', views.elemento, name='elemento'),
 
+    url(r'^projeto/visualizar/(?P<projeto_id>\d+)$', views.projeto_visualizar, name='projeto_visualizar'),
     url(r'^projeto/importar/(?P<projeto_id>\d+)$', views.projeto_importar, name='projeto_importar'),
     url(r'^projeto/delete/(?P<projeto_id>\d+)$', views.projeto_delete, name='projeto_delete'),
     url(r'^projeto/edit/(?P<projeto_id>\d+)$', views.projeto_edit, name='projeto_edit'),

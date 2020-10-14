@@ -51,7 +51,7 @@ class CertificadoElementoAdmin(ImportExportModelAdmin):
         'concentracao',
         'incerteza_expandida',
         'incerteza_padrao',
-        'incerteza_confianca',
+        'intervalo_confianca',
         'incerteza_combinada',
         'fracao_massa',
         'tipo_fracao_massa'
@@ -70,7 +70,6 @@ class CertificadoElementoAdmin(ImportExportModelAdmin):
 @admin.register(Medicao)
 class MedicaoAdmin(ImportExportModelAdmin):
     list_display = (
-        'descricao',
         'projeto',
         'dados_elemento',
         'tipo_incerteza',
