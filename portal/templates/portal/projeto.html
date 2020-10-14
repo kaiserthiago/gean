@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="col-sm-2">
-                    <a class="float-right btn primary-color-dark white-text btn-rounded" href="{% url 'projeto_new' %}">Adicionar</a>
+                    <a class="float-right btn primary-color-dark white-text btn-rounded" href="{% url 'projeto_new' %}"><i class="fas fa-plus-circle"></i> Adicionar</a>
                 </div>
             </div>
 
@@ -46,9 +46,11 @@
                             <td>{{ projeto.autor }}</td>
                             <td>{{ projeto.data_inicio|date:'d/m/Y' }}</td>
                             <td>{{ projeto.get_situacao_display }}</td>
-                            <td style="text-align: right; width: 8%">
-                                <a href="{% url 'projeto_edit' projeto.id %}"><i class="fas fa-pencil-alt mr-1 orange-text"></i></a>
-                                <a data-toggle="modal" href="#Excluir{{ projeto.id }}"><i class="fas fa-trash mr-1 red-text"></i></a>
+                            <td style="text-align: right; width: 10%">
+                                <a href="#"><i class="fas fa-search mr-1 blue-text" data-toggle="tooltip" title="Visualizar"></i></a>
+                                <a href="{% url 'projeto_importar' projeto.id %}"><i class="fas fa-download mr-1 green-text" data-toggle="tooltip" title="Importar"></i></a>
+                                <a href="{% url 'projeto_edit' projeto.id %}" data-toggle="tooltip" title="Editar"><i class="fas fa-pencil-alt mr-1 orange-text"></i></a>
+                                <a data-toggle="modal" href="#Excluir{{ projeto.id }}"><i class="fas fa-trash mr-1 red-text" data-toggle="tooltip" title="Excluir"></i></a>
                             </td>
                         </tr>
                     {% empty %}

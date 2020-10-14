@@ -3,12 +3,65 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
+from tablib import Dataset
+
 from portal.forms import ProjetoForm
 from portal.models import Projeto, Elemento, Certificado, CertificadoElemento
 
 
 def home(request):
     return render(request, 'portal/home.html', {})
+
+
+@login_required
+def projeto_importar(request, projeto_id):
+    projeto = get_object_or_404(Projeto, id=projeto_id)
+
+    if request.method == 'POST':
+        dataset = Dataset()
+        new_persons = request.FILES['myfile']
+
+        imported_data = dataset.load(new_persons.read())
+
+        # VERIFICA O ARQUIVO A PARTIR DA LINHA 1
+        for n in imported_data[0:]:
+            try:
+                aluno = get_object_or_404(Aluno, data_resposta=n[0], campus=n[50])
+            except:
+                aluno = None
+
+            if not aluno:
+                aluno = Aluno()
+
+                aluno.data_resposta = str(n[0])
+                aluno.campus = str(n[50])
+                aluno.acesso_internet = str(n[51])
+                aluno.possui_pc = str(n[52])
+                aluno.possui_celular = str(n[53])
+                aluno.possui_tablet = str(n[54])
+                aluno.possui_tv = str(n[55])
+                aluno.nivel_curso = str(n[56])
+                aluno.deficiencia = str(n[57])
+                aluno.transtorno = str(n[58])
+                aluno.orientacao_enviada = str(n[59])
+                aluno.avaliacao_orientacoes = int(n[60])
+                aluno.conteudo_enviada = str(n[61])
+                aluno.avaliacao_conteudo = int(n[62])
+                aluno.avaliacao_moodle = int(n[64])
+                aluno.melhoria_ava = str(n[65])
+                aluno.docente_melhorar = str(n[66])
+                aluno.auxilio = str(n[67])
+                aluno.posicao = str(n[68])
+
+                aluno.save()
+
+        messages.success(request, 'Dados importados com sucesso')
+
+    context = {
+        'projeto': projeto
+    }
+
+    return render(request, 'portal/projeto_importar.html', context)
 
 
 @login_required

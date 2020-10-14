@@ -138,7 +138,7 @@
 <!--Main layout-->
 <div class="content">
     <main>
-        <div class="container-fluid">
+        <div class="container">
 
             {% block breadcrumb_base %}
             {% endblock %}
@@ -265,6 +265,13 @@
         {% endif %}
     {% endfor %}
 {% endif %}
+<script>
+    function disableButton() {
+        var btn = document.getElementById('btn_enviar');
+        btn.disabled = true;
+        btn.innerText = 'Processando...'
+    }
+</script>
 
 <script>
     $(document).ready(function () {
@@ -284,6 +291,14 @@
     new WOW().init();
 
 </script>
+
+<script>
+    // Tooltips Initialization
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+</script>
+
 <script>
     $('.datepicker').pickadate({
         format: "dd/mm/yyyy",
@@ -306,8 +321,8 @@
         closeOnSelect: false // Close upon selecting a date,
     });
 </script>
-<script type='text/javascript'>
 
+<script type='text/javascript'>
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -326,6 +341,7 @@
         "hideMethod": "fadeOut"
     }
 </script>
+
 {% block script %}
 
 {% endblock %}

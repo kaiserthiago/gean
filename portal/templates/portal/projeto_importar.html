@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}Projetos{% endblock %}
+{% block class_cadastro_menu %}active{% endblock %}
+{% block class_projeto_item %}collapsible-header active{% endblock %}
+
+{% block breadcrumb_base %}
+    <ol class="breadcrumb blue-grey lighten-4">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'projeto' %}">Projetos</a></li>
+        <li class="breadcrumb-item active">Importar Dados</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-4">
+        <div class="card-header grey lighten-1">
+            <p class="font-weight-bold text-uppercase mb-0">
+                Dados do Projeto
+            </p>
+        </div>
+        <div class="card-body">
+            <table class="table table-borderless">
+                <tr>
+                    <td>
+                        <span class="font-weight-bold">Autor: </span> {{ projeto.autor }}
+                    </td>
+                    <td>
+                        <span class="font-weight-bold"> Início: </span> {{ projeto.data_inicio }}
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <span class="font-weight-bold"> Descrição: </span> {{ projeto.descricao }}
+                    </td>
+                    <td>
+                        <span class="font-weight-bold">Situação: </span> {{ projeto.get_situacao_display }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header grey lighten-1">
+            <p class="font-weight-bold text-uppercase mb-0">
+                Importar Dados do Projeto
+            </p>
+        </div>
+        <div class="card-body">
+            <div class="note note-success">
+               <strong>Info:</strong> Importe seus dados a partir de um arquivo de Planilha Eletrônica.
+            </div>
+            <div class="form-row">
+                <div class="col-sm-12">
+                    <form method="POST" enctype="multipart/form-data" class="md-form" onsubmit='disableButton()'>
+                        {% csrf_token %}
+                        <div class="file-field">
+                            <div class="btn btn-primary">
+                                <span>Selecionar arquivo</span>
+                                <input type="file" name="myfile" required readonly>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input type="text" class="file-path validate" name="myfile"
+                                       placeholder="Escolha o arquivo" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-sm-12">
+                                <div class="float-right">
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-download"></i> Importar</button>
+                                    <a href="{% url 'projeto' %}" class="btn btn-danger"><i
+                                            class="fa fa-times-circle"></i> Cancelar</a>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
