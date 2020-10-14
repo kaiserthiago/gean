@@ -62,7 +62,7 @@
                         <th scope="col" colspan="11" class="font-weight-bold text-center">Valores Recalculados do
                             Conjunto de Dados
                         </th>
-                        <th scope="col" colspan="2" class="font-weight-bold text-center">Certificado</th>
+                        <th scope="col" colspan="3" class="font-weight-bold text-center">Certificado</th>
                     </tr>
                     <tr>
 
@@ -79,6 +79,7 @@
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Variância</th>
 
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Valor Certificado</th>
+                        <th scope="col" class="font-weight-bold" style="text-align: center;">Incerteza Padrão</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Incerteza Expandida</th>
                     </tr>
                     </thead>
@@ -117,6 +118,7 @@
                             {% endfor %}
 
                             <td style="text-align: center">{{ media.dados_elemento__concentracao|format }}</td>
+                            <td style="text-align: center">{{ media.dados_elemento__incerteza_padrao|format }}</td>
                             <td style="text-align: center">{{ media.dados_elemento__incerteza_expandida|format }}</td>
                         </tr>
                     {% endfor %}
