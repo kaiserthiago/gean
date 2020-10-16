@@ -96,18 +96,18 @@ class CertificadoElemento(AuditoriaMixin):
     certificado = models.ForeignKey(Certificado, on_delete=models.CASCADE)
     elemento = models.ForeignKey(Elemento, on_delete=models.CASCADE)
     tipo_concentracao = models.IntegerField(verbose_name='Tipo Concentração', choices=TIPO_CONCENTRACAO, default=0)
-    concentracao = models.DecimalField(verbose_name='Concentração', decimal_places=5, max_digits=10,
+    concentracao = models.DecimalField(verbose_name='Concentração', decimal_places=5, max_digits=15,
                                        validators=[MinValueValidator(0)])
-    incerteza_expandida = models.DecimalField(verbose_name='Incerteza Expandida', decimal_places=5, max_digits=10,
+    incerteza_expandida = models.DecimalField(verbose_name='Incerteza Expandida', decimal_places=5, max_digits=15,
                                               validators=[MinValueValidator(0)], null=True, blank=True)
     incerteza_padrao = models.DecimalField(verbose_name='Incerteza Padrão', decimal_places=5,
-                                           max_digits=10,
+                                           max_digits=15,
                                            validators=[MinValueValidator(0)], default=0, null=True, blank=True)
     incerteza_combinada = models.DecimalField(verbose_name='Incerteza Combinada', decimal_places=5,
-                                              max_digits=10,
+                                              max_digits=15,
                                               validators=[MinValueValidator(0)], default=0, null=True, blank=True)
     intervalo_confianca = models.DecimalField(verbose_name='Intervalo de Confiança', decimal_places=5,
-                                              max_digits=10,
+                                              max_digits=15,
                                               validators=[MinValueValidator(0)], default=0, null=True, blank=True)
     fracao_massa = models.DecimalField(verbose_name='Fração de massa', decimal_places=10, max_digits=15,
                                        validators=[MinValueValidator(0)], default=0)
@@ -139,25 +139,25 @@ class Medicao(AuditoriaMixin):
     dados_elemento = models.ForeignKey(CertificadoElemento, on_delete=models.CASCADE)
     tipo_incerteza = models.IntegerField(choices=TIPO_INCERTEZA, default=0)
     data = models.DateField()
-    concentracao_medicao = models.DecimalField(verbose_name='Concentração', decimal_places=5, max_digits=10,
+    concentracao_medicao = models.DecimalField(verbose_name='Concentração', decimal_places=5, max_digits=15,
                                                validators=[MinValueValidator(0)], default=0,
                                                help_text='Dados da medição')
     incerteza_padrao_medicao = models.DecimalField(verbose_name='Incerteza Padrão', decimal_places=5,
-                                                   max_digits=10,
+                                                   max_digits=15,
                                                    validators=[MinValueValidator(0)], default=0, null=True, blank=True,
                                                    help_text='Dados da medição')
     incerteza_expandida_medicao = models.DecimalField(verbose_name='Incerteza Expandida', decimal_places=5,
-                                                      max_digits=10,
+                                                      max_digits=15,
                                                       validators=[MinValueValidator(0)], default=0, null=True,
                                                       blank=True, help_text='Dados da medição')
     incerteza_expandida_combinada = models.DecimalField(verbose_name='Incerteza Expandida Combinada',
                                                         decimal_places=5,
-                                                        max_digits=10,
+                                                        max_digits=15,
                                                         validators=[MinValueValidator(0)], default=0, null=True,
                                                         blank=True, help_text='Dados da medição')
     intervalo_confianca_medicao = models.DecimalField(verbose_name='Intervalo de Confiança',
                                                         decimal_places=5,
-                                                        max_digits=10,
+                                                        max_digits=15,
                                                         validators=[MinValueValidator(0)], default=0, null=True,
                                                         blank=True, help_text='Dados da medição')
 
