@@ -101,7 +101,7 @@ class CertificadoElemento(AuditoriaMixin):
     concentracao = models.DecimalField(verbose_name='Concentração', decimal_places=5, max_digits=15,
                                        validators=[MinValueValidator(0)])
     incerteza_expandida = models.DecimalField(verbose_name='Incerteza Expandida', decimal_places=5, max_digits=15,
-                                              validators=[MinValueValidator(0)], null=True, blank=True)
+                                              validators=[MinValueValidator(0)], null=True, blank=True, default=0)
     incerteza_padrao = models.DecimalField(verbose_name='Incerteza Padrão', decimal_places=5,
                                            max_digits=15,
                                            validators=[MinValueValidator(0)], default=0, null=True, blank=True)

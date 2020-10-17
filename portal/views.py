@@ -384,12 +384,18 @@ def dados_certificados_importar(request):
 
                 dados.certificado = certificado1
                 dados.elemento = elemento
-                dados.concentracao = n[2]
-                dados.incerteza_expandida = n[3]
-                dados.incerteza_padrao = n[4]
-                dados.incerteza_combinada = n[5]
-                dados.intervalo_confianca = n[6]
-                dados.fracao_massa = n[7]
+                if n[2]:
+                    dados.concentracao = n[2]
+                if n[3]:
+                    dados.incerteza_expandida = n[3]
+                if n[4]:
+                    dados.incerteza_padrao = n[4]
+                if n[5]:
+                    dados.incerteza_combinada = n[5]
+                if n[6]:
+                    dados.intervalo_confianca = n[6]
+                if n[7]:
+                    dados.fracao_massa = n[7]
 
                 # TIPO DE CONCENTRAÇÃO
                 if n[1] == 'Certificado':
@@ -431,12 +437,19 @@ def dados_certificados_importar(request):
 
                     dados.certificado = certificado2
                     dados.elemento = elemento
-                    dados.concentracao = n[2]
-                    dados.incerteza_expandida = n[3]
-                    dados.incerteza_padrao = n[4]
-                    dados.incerteza_combinada = n[5]
-                    dados.intervalo_confianca = n[6]
-                    dados.fracao_massa = n[7]
+
+                    if n[2]:
+                        dados.concentracao = n[2]
+                    if n[3]:
+                        dados.incerteza_expandida = n[3]
+                    if n[4]:
+                        dados.incerteza_padrao = n[4]
+                    if n[5]:
+                        dados.incerteza_combinada = n[5]
+                    if n[6]:
+                        dados.intervalo_confianca = n[6]
+                    if n[7]:
+                        dados.fracao_massa = n[7]
 
                     # TIPO DE CONCENTRAÇÃO
                     if n[1] == 'Certificado':
@@ -476,12 +489,19 @@ def dados_certificados_importar(request):
 
                     dados.certificado = certificado3
                     dados.elemento = elemento
-                    dados.concentracao = n[2]
-                    dados.incerteza_expandida = n[3]
-                    dados.incerteza_padrao = n[4]
-                    dados.incerteza_combinada = n[5]
-                    dados.intervalo_confianca = n[6]
-                    dados.fracao_massa = n[7]
+
+                    if n[2]:
+                        dados.concentracao = n[2]
+                    if n[3]:
+                        dados.incerteza_expandida = n[3]
+                    if n[4]:
+                        dados.incerteza_padrao = n[4]
+                    if n[5]:
+                        dados.incerteza_combinada = n[5]
+                    if n[6]:
+                        dados.intervalo_confianca = n[6]
+                    if n[7]:
+                        dados.fracao_massa = n[7]
 
                     # TIPO DE CONCENTRAÇÃO
                     if n[1] == 'Certificado':
