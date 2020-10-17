@@ -57,44 +57,126 @@
             <form method="POST" enctype="multipart/form-data" class="md-form">
                 {% csrf_token %}
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         <div class="md-form md-outline input-group">
                             <input type="text" placeholder="Clique para selecionar"
                                    class="form-control datepicker text-center"
-                                   name="data"
-                                   id="id_data" value={{ data_inicial }}>
+                                   name="data1"
+                                   id="id_data1" value={{ data_inicial }}>
                             <label class="active font-weight-bold">
-                                Data <span class="red-text font-weight-bold">*</span>
+                                Data 1<span class="red-text font-weight-bold">*</span>
                             </label>
                         </div>
                     </div>
 
-                    <div class="col-sm-8 select-outline">
-                        <select name="certificado" id="id_certificado"
+                    <div class="col-sm-3 select-outline">
+                        <select name="certificado1" id="id_certificado1"
                                 class="mdb-select md-form md-outline colorful-select dropdown-primary" required
                                 searchable="Pesquisar">
-                            <option value="" disabled selected>Selecione o certificado</option>
+                            <option value="" disabled selected>Selecione o certificado 1</option>
                             {% for certificado in certificados %}
                                 <option value="{{ certificado.id }}">{{ certificado.codigo }}</option>
                             {% endfor %}
                         </select>
                         <label class="font-weight-bold" data-error="wrong" data-success="right">
-                            Certificado <span class="red-text font-weight-bold">*</span>
+                            Certificado 1<span class="red-text font-weight-bold">*</span>
                         </label>
                     </div>
-                </div>
 
-                <div class="row mb-4">
-                    <div class="col-sm-12">
+                    <div class="col-sm-7">
                         <div class="file-field">
                             <p></p>
                             <div class="btn btn-indigo float-left">
-                                <span>Selecionar arquivo</span>
-                                <input type="file" name="myfile" required readonly>
+                                <span>Selecionar arquivo 1</span>
+                                <input type="file" name="myfile1" required readonly>
                             </div>
                             <div class="file-path-wrapper">
-                                <input type="text" class="file-path validate" name="myfile"
-                                       placeholder="Escolha o arquivo" required readonly>
+                                <input type="text" class="file-path validate" name="myfile1"
+                                       placeholder="Escolha o arquivo 1" required readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="md-form md-outline input-group">
+                            <input type="text" placeholder="Clique para selecionar"
+                                   class="form-control datepicker text-center"
+                                   name="data2"
+                                   id="id_data2" value={{ data_inicial }}>
+                            <label class="active font-weight-bold">
+                                Data 2
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 select-outline">
+                        <select name="certificado2" id="id_certificado2"
+                                class="mdb-select md-form md-outline colorful-select dropdown-primary"
+                                searchable="Pesquisar">
+                            <option value="" disabled selected>Selecione o certificado 2</option>
+                            {% for certificado in certificados %}
+                                <option value="{{ certificado.id }}">{{ certificado.codigo }}</option>
+                            {% endfor %}
+                        </select>
+                        <label class="font-weight-bold" data-error="wrong" data-success="right">
+                            Certificado 2
+                        </label>
+                    </div>
+
+                    <div class="col-sm-7">
+                        <div class="file-field">
+                            <p></p>
+                            <div class="btn btn-indigo float-left">
+                                <span>Selecionar arquivo 2</span>
+                                <input type="file" name="myfile2">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input type="text" class="file-path validate" name="myfile2"
+                                       placeholder="Escolha o arquivo 2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="md-form md-outline input-group">
+                            <input type="text" placeholder="Clique para selecionar"
+                                   class="form-control datepicker text-center"
+                                   name="data3"
+                                   id="id_data3" value={{ data_inicial }}>
+                            <label class="active font-weight-bold">
+                                Data 3
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 select-outline">
+                        <select name="certificado3" id="id_certificado3"
+                                class="mdb-select md-form md-outline colorful-select dropdown-primary"
+                                searchable="Pesquisar">
+                            <option value="" disabled selected>Selecione o certificado 3</option>
+                            {% for certificado in certificados %}
+                                <option value="{{ certificado.id }}">{{ certificado.codigo }}</option>
+                            {% endfor %}
+                        </select>
+                        <label class="font-weight-bold" data-error="wrong" data-success="right">
+                            Certificado 3
+                        </label>
+                    </div>
+
+                    <div class="col-sm-7">
+                        <div class="file-field">
+                            <p></p>
+                            <div class="btn btn-indigo float-left">
+                                <span>Selecionar arquivo 3</span>
+                                <input type="file" name="myfile3">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input type="text" class="file-path validate" name="myfile3"
+                                       placeholder="Escolha o arquivo 3">
                             </div>
                         </div>
                     </div>
@@ -103,7 +185,8 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="float-right">
-                            <button type="submit" class="btn success-color-dark white-text" onClick="javascript:showMyModalSetTitle();"><i class="fa fa-download"></i>
+                            <button type="submit" class="btn success-color-dark white-text"
+                                    onClick="javascript:showMyModalSetTitle();"><i class="fa fa-download"></i>
                                 Importar
                             </button>
                         </div>

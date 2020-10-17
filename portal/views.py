@@ -42,28 +42,28 @@ def projeto_importar(request, projeto_id):
 
     if request.method == 'POST':
         # PEGA A DATA DO FORM
-        data = request.POST['data']
-        data = data[6:10] + '-' + data[3:5] + '-' + data[0:2]
+        data1 = request.POST['data1']
+        data1 = data1[6:10] + '-' + data1[3:5] + '-' + data1[0:2]
 
         # PEGA O CERTIFICADO
-        certificado = Certificado.objects.get(id=request.POST['certificado'])
+        certificado1 = Certificado.objects.get(id=request.POST['certificado1'])
 
         # CARREGA OS DADOS DO XLS
-        dataset = Dataset()
-        new_persons = request.FILES['myfile']
+        dataset1 = Dataset()
+        arquivo1 = request.FILES['myfile1']
 
-        imported_data = dataset.load(new_persons.read())
+        imported_data1 = dataset1.load(arquivo1.read())
 
         # VERIFICA O ARQUIVO A PARTIR DA LINHA 1
-        for n in imported_data[0:]:
+        for n in imported_data1[0:]:
             try:
                 # BUSCA DOS DADOS DO CERTIFICADO
-                dado = CertificadoElemento.objects.get(elemento__simbolo=str(n[0]), certificado=certificado)
+                dado = CertificadoElemento.objects.get(elemento__simbolo=str(n[0]), certificado=certificado1)
 
                 medicao = Medicao()
                 medicao.projeto = projeto
                 medicao.concentracao_medicao = n[1]
-                medicao.data = data
+                medicao.data = data1
                 medicao.dados_elemento = dado
 
                 # INCERTEZA PADRÃO
@@ -90,6 +90,108 @@ def projeto_importar(request, projeto_id):
                 medicao.save()
             except:
                 pass
+
+        if 'certificado2' in request.POST:
+            # PEGA A DATA DO FORM
+            data2 = request.POST['data2']
+            data2 = data2[6:10] + '-' + data2[3:5] + '-' + data2[0:2]
+
+            # PEGA O CERTIFICADO
+            certificado2 = Certificado.objects.get(id=request.POST['certificado2'])
+
+            # CARREGA OS DADOS DO XLS
+            dataset2 = Dataset()
+            arquivo2 = request.FILES['myfile2']
+
+            imported_data2 = dataset2.load(arquivo2.read())
+
+            # VERIFICA O ARQUIVO A PARTIR DA LINHA 1
+            for n in imported_data2[0:]:
+                try:
+                    # BUSCA DOS DADOS DO CERTIFICADO
+                    dado = CertificadoElemento.objects.get(elemento__simbolo=str(n[0]), certificado=certificado2)
+
+                    medicao = Medicao()
+                    medicao.projeto = projeto
+                    medicao.concentracao_medicao = n[1]
+                    medicao.data = data2
+                    medicao.dados_elemento = dado
+
+                    # INCERTEZA PADRÃO
+                    if n[2]:
+                        medicao.incerteza_padrao_medicao = n[2]
+                        medicao.tipo_incerteza = 1
+
+                    # INCERTEZA EXPANDIDA
+                    if n[3]:
+                        medicao.incerteza_expandida_medicao = n[3]
+                        medicao.tipo_incerteza = 0
+
+                    # INCERTEZA EXPANDIDA COMBINADA
+                    if n[4]:
+                        medicao.incerteza_expandida_combinada = n[4]
+                        medicao.tipo_incerteza = 3
+
+                    # INTERVALO DE CONFIANÇA
+                    if n[5]:
+                        medicao.intervalo_confianca_medicao = n[5]
+                        medicao.tipo_incerteza = 2
+
+                    medicao.user = request.user
+                    medicao.save()
+                except:
+                    pass
+
+        if 'certificado3' in request.POST:
+            # PEGA A DATA DO FORM
+            data3 = request.POST['data3']
+            data3 = data3[6:10] + '-' + data3[3:5] + '-' + data3[0:2]
+
+            # PEGA O CERTIFICADO
+            certificado3 = Certificado.objects.get(id=request.POST['certificado3'])
+
+            # CARREGA OS DADOS DO XLS
+            dataset3 = Dataset()
+            arquivo3 = request.FILES['myfile3']
+
+            imported_data3 = dataset3.load(arquivo3.read())
+
+            # VERIFICA O ARQUIVO A PARTIR DA LINHA 1
+            for n in imported_data3[0:]:
+                try:
+                    # BUSCA DOS DADOS DO CERTIFICADO
+                    dado = CertificadoElemento.objects.get(elemento__simbolo=str(n[0]), certificado=certificado3)
+
+                    medicao = Medicao()
+                    medicao.projeto = projeto
+                    medicao.concentracao_medicao = n[1]
+                    medicao.data = data3
+                    medicao.dados_elemento = dado
+
+                    # INCERTEZA PADRÃO
+                    if n[2]:
+                        medicao.incerteza_padrao_medicao = n[2]
+                        medicao.tipo_incerteza = 1
+
+                    # INCERTEZA EXPANDIDA
+                    if n[3]:
+                        medicao.incerteza_expandida_medicao = n[3]
+                        medicao.tipo_incerteza = 0
+
+                    # INCERTEZA EXPANDIDA COMBINADA
+                    if n[4]:
+                        medicao.incerteza_expandida_combinada = n[4]
+                        medicao.tipo_incerteza = 3
+
+                    # INTERVALO DE CONFIANÇA
+                    if n[5]:
+                        medicao.intervalo_confianca_medicao = n[5]
+                        medicao.tipo_incerteza = 2
+
+                    medicao.user = request.user
+                    medicao.save()
+                except:
+                    pass
 
         messages.success(request, 'Dados importados com sucesso')
         return redirect('projeto_visualizar', projeto_id)
