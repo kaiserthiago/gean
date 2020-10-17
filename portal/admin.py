@@ -45,6 +45,7 @@ class ElementoAdmin(ImportExportModelAdmin):
 @admin.register(CertificadoElemento)
 class CertificadoElementoAdmin(ImportExportModelAdmin):
     list_display = (
+        'id',
         'certificado',
         'elemento',
         'tipo_concentracao',

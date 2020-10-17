@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% block title %}Dados dos Certificados{% endblock %}
+{% block class_cadastro_menu %}active{% endblock %}
+{% block class_dados_certificado_item %}collapsible-header active{% endblock %}
+{% load static %}
+
+{% block breadcrumb_base %}
+    <ol class="breadcrumb blue-grey lighten-4">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'dados_certificados' %}">Dados dos Certificados</a></li>
+        <li class="breadcrumb-item active">Importar Dados</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="card mb-4">
+        <div class="card-header grey lighten-1">
+            <p class="font-weight-bold text-uppercase mb-0">
+                Importar Dados do Certificado
+            </p>
+        </div>
+        <div class="card-body">
+            <div class="note note-success">
+                <a href="{% static 'data/modelo_dados_certificado.xlsx' %}" class="black-text">
+                    <strong>Info:</strong> Clique aqui para fazer o download de nossa Planilha Modelo
+                </a>
+            </div>
+            <form method="POST" enctype="multipart/form-data" class="md-form" onsubmit='disableButton()'>
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-6 select-outline">
+                        <select name="certificado1" id="id_certificado1"
+                                class="mdb-select md-form md-outline colorful-select dropdown-primary" required
+                                searchable="Pesquisar">
+                            <option value="" disabled selected>Selecione o certificado</option>
+                            {% for certificado in certificados %}
+                                <option value="{{ certificado.id }}">{{ certificado.codigo }}</option>
+                            {% endfor %}
+                        </select>
+                        <label class="font-weight-bold" data-error="wrong" data-success="right">
+                            Certificado 1<span class="red-text font-weight-bold">*</span>
+                        </label>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="file-field">
+                            <p></p>
+                            <div class="btn btn-indigo float-left">
+                                <span>Selecionar arquivo 1</span>
+                                <input type="file" name="myfile1" required readonly>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input type="text" class="file-path validate" name="myfile1"
+                                       placeholder="Escolha o arquivo" required readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 select-outline">
+                        <select name="certificado2" id="id_certificado2"
+                                class="mdb-select md-form md-outline colorful-select dropdown-primary"
+                                searchable="Pesquisar">
+                            <option value="" disabled selected>Selecione o certificado</option>
+                            {% for certificado in certificados %}
+                                <option value="{{ certificado.id }}">{{ certificado.codigo }}</option>
+                            {% endfor %}
+                        </select>
+                        <label class="font-weight-bold" data-error="wrong" data-success="right">
+                            Certificado 2
+                        </label>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="file-field">
+                            <p></p>
+                            <div class="btn btn-indigo float-left">
+                                <span>Selecionar arquivo 2</span>
+                                <input type="file" name="myfile2" required readonly>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input type="text" class="file-path validate" name="myfile2"
+                                       placeholder="Escolha o arquivo" required readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+             <div class="row">
+                    <div class="col-sm-6 select-outline">
+                        <select name="certificado3" id="id_certificado3"
+                                class="mdb-select md-form md-outline colorful-select dropdown-primary"
+                                searchable="Pesquisar">
+                            <option value="" disabled selected>Selecione o certificado</option>
+                            {% for certificado in certificados %}
+                                <option value="{{ certificado.id }}">{{ certificado.codigo }}</option>
+                            {% endfor %}
+                        </select>
+                        <label class="font-weight-bold" data-error="wrong" data-success="right">
+                            Certificado 3
+                        </label>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="file-field">
+                            <p></p>
+                            <div class="btn btn-indigo float-left">
+                                <span>Selecionar arquivo 3</span>
+                                <input type="file" name="myfile3" required readonly>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input type="text" class="file-path validate" name="myfile3"
+                                       placeholder="Escolha o arquivo" required readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="float-right">
+                            <button id="btn_enviar" type="submit" class="btn btn-success"><i class="fa fa-download"></i>
+                                Importar
+                            </button>
+                            <a id="btn_cancelar" href="{% url 'dados_certificados' %}" class="btn btn-danger"><i
+                                    class="fa fa-times-circle"></i> Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

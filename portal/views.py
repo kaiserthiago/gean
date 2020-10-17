@@ -254,3 +254,151 @@ def dados_certificados(request):
     }
 
     return render(request, 'portal/dados_certificados.html', context)
+
+@login_required
+def dados_certificados_importar(request):
+    certificados = Certificado.objects.all()
+
+    if request.method == 'POST':
+        # PEGA O CERTIFICADO
+        certificado1 = Certificado.objects.get(id=request.POST['certificado1'])
+
+        # CARREGA OS DADOS DO XLS
+        dataset1 = Dataset()
+        arquivo1 = request.FILES['myfile1']
+        imported_data1 = dataset1.load(arquivo1.read())
+
+        # VERIFICA O ARQUIVO 1 A PARTIR DA LINHA 1
+        for n in imported_data1[0:]:
+            try:
+                # PEGA O ELEMENTO
+                elemento = Elemento.objects.get(simbolo=n[0])
+
+                dados = CertificadoElemento()
+
+                dados.certificado = certificado1
+                dados.elemento = elemento
+                dados.concentracao = n[2]
+                dados.incerteza_expandida = n[3]
+                dados.incerteza_padrao = n[4]
+                dados.incerteza_combinada = n[5]
+                dados.intervalo_confianca = n[6]
+                dados.fracao_massa = n[7]
+
+                # TIPO DE CONCENTRAÇÃO
+                if n[1] == 'Certificado':
+                    dados.tipo_concentracao = 0
+                elif n[1] == 'Informado':
+                    dados.tipo_concentracao = 1
+
+                # TIPO DE FRAÇÃO DE MASSA
+                if n[8] == '%':
+                    dados.tipo_fracao_massa = 0
+                elif n[8] == 'PPM':
+                    dados.tipo_fracao_massa = 1
+                elif n[8] == 'PPB':
+                    dados.tipo_fracao_massa = 2
+
+                dados.user = request.user
+                dados.save()
+            except:
+                pass
+
+        if 'certificado2' in request.POST:
+            # PEGA O CERTIFICADO
+            certificado2 = Certificado.objects.get(id=request.POST['certificado2'])
+
+            # CARREGA OS DADOS DO XLS
+            dataset2 = Dataset()
+            arquivo2 = request.FILES['myfile2']
+            imported_data2 = dataset2.load(arquivo2.read())
+
+            # VERIFICA O ARQUIVO 2 A PARTIR DA LINHA 1
+            for n in imported_data2[0:]:
+                try:
+                    # PEGA O ELEMENTO
+                    elemento = Elemento.objects.get(simbolo=n[0])
+
+                    dados = CertificadoElemento()
+
+                    dados.certificado = certificado2
+                    dados.elemento = elemento
+                    dados.concentracao = n[2]
+                    dados.incerteza_expandida = n[3]
+                    dados.incerteza_padrao = n[4]
+                    dados.incerteza_combinada = n[5]
+                    dados.intervalo_confianca = n[6]
+                    dados.fracao_massa = n[7]
+
+                    # TIPO DE CONCENTRAÇÃO
+                    if n[1] == 'Certificado':
+                        dados.tipo_concentracao = 0
+                    elif n[1] == 'Informado':
+                        dados.tipo_concentracao = 1
+
+                    # TIPO DE FRAÇÃO DE MASSA
+                    if n[8] == '%':
+                        dados.tipo_fracao_massa = 0
+                    elif n[8] == 'PPM':
+                        dados.tipo_fracao_massa = 1
+                    elif n[8] == 'PPB':
+                        dados.tipo_fracao_massa = 2
+
+                    dados.user = request.user
+                    dados.save()
+                except:
+                    pass
+
+        if 'certificado3' in request.POST:
+            # PEGA O CERTIFICADO
+            certificado3 = Certificado.objects.get(id=request.POST['certificado3'])
+
+            # CARREGA OS DADOS DO XLS
+            dataset3 = Dataset()
+            arquivo3 = request.FILES['myfile3']
+            imported_data3 = dataset3.load(arquivo3.read())
+
+            # VERIFICA O ARQUIVO 3 A PARTIR DA LINHA 1
+            for n in imported_data3[0:]:
+                try:
+                    # PEGA O ELEMENTO
+                    elemento = Elemento.objects.get(simbolo=n[0])
+
+                    dados = CertificadoElemento()
+
+                    dados.certificado = certificado3
+                    dados.elemento = elemento
+                    dados.concentracao = n[2]
+                    dados.incerteza_expandida = n[3]
+                    dados.incerteza_padrao = n[4]
+                    dados.incerteza_combinada = n[5]
+                    dados.intervalo_confianca = n[6]
+                    dados.fracao_massa = n[7]
+
+                    # TIPO DE CONCENTRAÇÃO
+                    if n[1] == 'Certificado':
+                        dados.tipo_concentracao = 0
+                    elif n[1] == 'Informado':
+                        dados.tipo_concentracao = 1
+
+                    # TIPO DE FRAÇÃO DE MASSA
+                    if n[8] == '%':
+                        dados.tipo_fracao_massa = 0
+                    elif n[8] == 'PPM':
+                        dados.tipo_fracao_massa = 1
+                    elif n[8] == 'PPB':
+                        dados.tipo_fracao_massa = 2
+
+                    dados.user = request.user
+                    dados.save()
+                except:
+                    pass
+
+        messages.success(request, 'Dados importados com sucesso')
+        return redirect('dados_certificados')
+
+    context = {
+        'certificados': certificados,
+    }
+
+    return render(request, 'portal/dados_certificados_importar.html', context)
