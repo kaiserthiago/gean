@@ -54,7 +54,7 @@
                     <strong>Info:</strong> Clique aqui para fazer o download de nossa Planilha Modelo
                 </a>
             </div>
-            <form method="POST" enctype="multipart/form-data" class="md-form" onsubmit='disableButton()'>
+            <form method="POST" enctype="multipart/form-data" class="md-form">
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-sm-4">
@@ -103,7 +103,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="float-right">
-                            <button id="btn_enviar" type="submit" class="btn btn-success"><i class="fa fa-download"></i>
+                            <button type="submit" class="btn btn-success" onClick="javascript:showMyModalSetTitle();"><i class="fa fa-download"></i>
                                 Importar
                             </button>
                         </div>
