@@ -57,107 +57,112 @@
         </div>
     </div>
 
-    <div class="card mb-4">
-        <div class="card-header grey lighten-1">
-            <p class="font-weight-bold text-uppercase mb-0">
-                ESTATÍSTICAS DAS MEDIÇÕES
-            </p>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-striped table-sm table-bordered">
-                    <thead style="background: lightgrey">
-                    <tr>
-                        <th scope="col" class="font-weight-bold" style="text-align: center; vertical-align: middle"
-                            rowspan="2">Elemento
-                        </th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center; vertical-align: middle"
-                            rowspan="2">N
-                        </th>
-                        <th scope="col" colspan="12" class="font-weight-bold text-center">Valores Recalculados do
-                            Conjunto de Dados
-                        </th>
-                        <th scope="col" colspan="3" class="font-weight-bold text-center">Certificado</th>
-                    </tr>
-                    <tr>
-
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">X</th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">Y</th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">DP</th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">DA</th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">DPR (%)</th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">Er (%)</th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">En</th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">Z</th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">Z Horwitz</th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">Zeta</th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">Mediana</th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">Variância</th>
-
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">Valor Certificado</th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">Incerteza Padrão</th>
-                        <th scope="col" class="font-weight-bold" style="text-align: center;">Incerteza Expandida</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for media in media_concentracao %}
-                        <tr>
-                            <td style="text-align: center">
-                                {{ media.dados_elemento__elemento__simbolo }}
-                                {% if media.dados_elemento__tipo_concentracao == 1 %}
-                                    <span class="red-text font-weight-bold">*</span>
-                                {% endif %}
-                            </td>
-                            <td style="text-align: center">{{ media.total }}</td>
-                            <td style="text-align: center">{{ media.concentracao|floatformat:4 }}</td>
-                            <td style="text-align: center">{{ media.incerteza_padrao|floatformat:4 }}</td>
-
-                            {% for elemento, valor in desvio_padrao.items %}
-                                {% if elemento == media.dados_elemento__elemento__simbolo %}
-                                    <td style="text-align: center">{{ valor|floatformat:4 }}</td>
-                                {% endif %}
-                            {% endfor %}
-
-                            <td style="text-align: center">{% diferenca_absoluta media.concentracao media.dados_elemento__concentracao %}</td>
-                            <td style="text-align: center">{% dpr media.incerteza_padrao media.concentracao %}</td>
-                            <td style="text-align: center">{% er media.concentracao media.dados_elemento__concentracao %}</td>
-                            <td style="text-align: center">{% en media.concentracao media.dados_elemento__concentracao media.incerteza_padrao media.dados_elemento__incerteza_expandida %}</td>
-                            <td style="text-align: center">{% z_score media.concentracao media.dados_elemento__concentracao media.dados_elemento__incerteza_expandida %}</td>
-                            <td style="text-align: center">{% z_horwitz media.concentracao media.dados_elemento__concentracao media.dados_elemento__tipo_fracao_massa %}</td>
-                            <td style="text-align: center">{% zeta_score media.concentracao media.dados_elemento__concentracao media.incerteza_padrao media.dados_elemento__incerteza_padrao %}</td>
-
-
-                            {% for elemento, valor in mediana.items %}
-                                {% if elemento == media.dados_elemento__elemento__simbolo %}
-                                    <td style="text-align: center">{{ valor|floatformat:4 }}</td>
-                                {% endif %}
-                            {% endfor %}
-
-                            {% for elemento, valor in variancia.items %}
-                                {% if elemento == media.dados_elemento__elemento__simbolo %}
-                                    <td style="text-align: center">{{ valor|floatformat:4 }}</td>
-                                {% endif %}
-                            {% endfor %}
-
-                            <td style="text-align: center">{{ media.dados_elemento__concentracao|format }}</td>
-                            <td style="text-align: center">{{ media.dados_elemento__incerteza_padrao|format }}</td>
-                            <td style="text-align: center">{{ media.dados_elemento__incerteza_expandida|format }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+    {% if projeto.get_medicoes %}
+        <div class="card mb-4">
+            <div class="card-header grey lighten-1">
+                <p class="font-weight-bold text-uppercase mb-0">
+                    ESTATÍSTICAS DAS MEDIÇÕES
+                </p>
             </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm table-bordered">
+                        <thead style="background: lightgrey">
+                        <tr>
+                            <th scope="col" class="font-weight-bold" style="text-align: center; vertical-align: middle"
+                                rowspan="2">Elemento
+                            </th>
+                            <th scope="col" class="font-weight-bold" style="text-align: center; vertical-align: middle"
+                                rowspan="2">N
+                            </th>
+                            <th scope="col" colspan="12" class="font-weight-bold text-center">Valores Recalculados do
+                                Conjunto de Dados
+                            </th>
+                            <th scope="col" colspan="3" class="font-weight-bold text-center">Certificado</th>
+                        </tr>
+                        <tr>
 
-            <hr>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">X</th>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">Y</th>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">DP</th>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">DA</th>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">DPR (%)</th>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">Er (%)</th>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">En</th>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">Z</th>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">Z Horwitz</th>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">Zeta</th>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">Mediana</th>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">Variância</th>
 
-            <p class="font-small">
-                * Tipo de Concentração Informada; N = Número de Determinações; X = Valor Médio; Y = Incerteza Padrão Média; DP =
-                Desvio Padrão; DA = Diferença Absoluta; DPR(%) =
-                Desvio Padrão Relativo; Er(%) = Erro Relativo Percentual; En = Erro Normalizado; Z = Índice Z; Z Horwitz
-                = Índice Z Aplicando Fator Horwitz; Zeta = Índice Zeta
-            </p>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">Valor Certificado</th>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">Incerteza Padrão</th>
+                            <th scope="col" class="font-weight-bold" style="text-align: center;">Incerteza Expandida
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for media in media_concentracao %}
+                            <tr>
+                                <td style="text-align: center">
+                                    {{ media.dados_elemento__elemento__simbolo }}
+                                    {% if media.dados_elemento__tipo_concentracao == 1 %}
+                                        <span class="red-text font-weight-bold">*</span>
+                                    {% endif %}
+                                </td>
+                                <td style="text-align: center">{{ media.total }}</td>
+                                <td style="text-align: center">{{ media.concentracao|floatformat:4 }}</td>
+                                <td style="text-align: center">{{ media.incerteza_padrao|floatformat:4 }}</td>
+
+                                {% for elemento, valor in desvio_padrao.items %}
+                                    {% if elemento == media.dados_elemento__elemento__simbolo %}
+                                        <td style="text-align: center">{{ valor|floatformat:4 }}</td>
+                                    {% endif %}
+                                {% endfor %}
+
+                                <td style="text-align: center">{% diferenca_absoluta media.concentracao media.dados_elemento__concentracao %}</td>
+                                <td style="text-align: center">{% dpr media.incerteza_padrao media.concentracao %}</td>
+                                <td style="text-align: center">{% er media.concentracao media.dados_elemento__concentracao %}</td>
+                                <td style="text-align: center">{% en media.concentracao media.dados_elemento__concentracao media.incerteza_padrao media.dados_elemento__incerteza_expandida %}</td>
+                                <td style="text-align: center">{% z_score media.concentracao media.dados_elemento__concentracao media.dados_elemento__incerteza_expandida %}</td>
+                                <td style="text-align: center">{% z_horwitz media.concentracao media.dados_elemento__concentracao media.dados_elemento__tipo_fracao_massa %}</td>
+                                <td style="text-align: center">{% zeta_score media.concentracao media.dados_elemento__concentracao media.incerteza_padrao media.dados_elemento__incerteza_padrao %}</td>
+
+
+                                {% for elemento, valor in mediana.items %}
+                                    {% if elemento == media.dados_elemento__elemento__simbolo %}
+                                        <td style="text-align: center">{{ valor|floatformat:4 }}</td>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% for elemento, valor in variancia.items %}
+                                    {% if elemento == media.dados_elemento__elemento__simbolo %}
+                                        <td style="text-align: center">{{ valor|floatformat:4 }}</td>
+                                    {% endif %}
+                                {% endfor %}
+
+                                <td style="text-align: center">{{ media.dados_elemento__concentracao|format }}</td>
+                                <td style="text-align: center">{{ media.dados_elemento__incerteza_padrao|format }}</td>
+                                <td style="text-align: center">{{ media.dados_elemento__incerteza_expandida|format }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr>
+
+                <p class="font-small">
+                    * Tipo de Concentração Informada; N = Número de Determinações; X = Valor Médio; Y = Incerteza Padrão
+                    Média; DP =
+                    Desvio Padrão; DA = Diferença Absoluta; DPR(%) =
+                    Desvio Padrão Relativo; Er(%) = Erro Relativo Percentual; En = Erro Normalizado; Z = Índice Z; Z
+                    Horwitz
+                    = Índice Z Aplicando Fator Horwitz; Zeta = Índice Zeta
+                </p>
+            </div>
         </div>
-    </div>
+    {% endif %}
 
     <div class="card mb-4">
         <div class="card-header grey lighten-1">
