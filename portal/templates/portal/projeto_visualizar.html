@@ -20,25 +20,34 @@
             </p>
         </div>
         <div class="card-body">
-            <table class="table table-borderless">
-                <tr>
-                    <td>
-                        <span class="font-weight-bold">Autor: </span> {{ projeto.autor }}
-                    </td>
-                    <td>
-                        <span class="font-weight-bold">Início: </span> {{ projeto.data_inicio }}
-                    </td>
+            <div class="row">
+                <div class="col-sm-8">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>
+                                <span class="font-weight-bold">Autor: </span> {{ projeto.autor }}
+                            </td>
+                            <td>
+                                <span class="font-weight-bold">Início: </span> {{ projeto.data_inicio }}
+                            </td>
 
-                </tr>
-                <tr>
-                    <td>
-                        <span class="font-weight-bold">Descrição: </span> {{ projeto.descricao }}
-                    </td>
-                    <td>
-                        <span class="font-weight-bold">Situação: </span> {{ projeto.get_situacao_display }}
-                    </td>
-                </tr>
-            </table>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="font-weight-bold">Descrição: </span> {{ projeto.descricao }}
+                            </td>
+                            <td>
+                                <span class="font-weight-bold">Situação: </span> {{ projeto.get_situacao_display }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-sm-4 mt-4">
+                    <a class="btn btn-success" href="{% url 'projeto_importar' projeto.id %}"><i
+                            class="fas fa-download mr-1 white-text"></i>Importar Dados</a>
+
+                </div>
+            </div>
         </div>
     </div>
 
@@ -59,7 +68,7 @@
                         <th scope="col" class="font-weight-bold" style="text-align: center; vertical-align: middle"
                             rowspan="2">N
                         </th>
-                        <th scope="col" colspan="11" class="font-weight-bold text-center">Valores Recalculados do
+                        <th scope="col" colspan="12" class="font-weight-bold text-center">Valores Recalculados do
                             Conjunto de Dados
                         </th>
                         <th scope="col" colspan="3" class="font-weight-bold text-center">Certificado</th>
@@ -74,6 +83,7 @@
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Er (%)</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">En</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Z</th>
+                        <th scope="col" class="font-weight-bold" style="text-align: center;">Z Horwitz</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Zeta</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Mediana</th>
                         <th scope="col" class="font-weight-bold" style="text-align: center;">Variância</th>
@@ -102,6 +112,7 @@
                             <td style="text-align: center">{% er media.concentracao media.dados_elemento__concentracao %}</td>
                             <td style="text-align: center">{% en media.concentracao media.dados_elemento__concentracao media.incerteza_padrao media.dados_elemento__incerteza_expandida %}</td>
                             <td style="text-align: center">{% z_score media.concentracao media.dados_elemento__concentracao media.dados_elemento__incerteza_expandida %}</td>
+                            <td style="text-align: center">{% z_horwitz media.concentracao media.dados_elemento__concentracao media.dados_elemento__tipo_fracao_massa %}</td>
                             <td style="text-align: center">{% zeta_score media.concentracao media.dados_elemento__concentracao media.incerteza_padrao media.dados_elemento__incerteza_padrao %}</td>
 
 
@@ -129,9 +140,10 @@
             <hr>
 
             <p class="font-small">
-                N = Número de Determinações; X = Valor Médio; Y = Incerteza Padrão Média; DA = Diferença Absoluta; DP =
-                Desvio Padrão; DPR(%) =
-                Desvio Padrão Relativo; Er(%) = Erro Relativo Percentual; En = Erro Normalizado; Z = Índice Z; Zeta = Índice Zeta
+                N = Número de Determinações; X = Valor Médio; Y = Incerteza Padrão Média; DP =
+                Desvio Padrão; DA = Diferença Absoluta; DPR(%) =
+                Desvio Padrão Relativo; Er(%) = Erro Relativo Percentual; En = Erro Normalizado; Z = Índice Z; Z Horwitz
+                = Índice Z Aplicando Fator Horwitz; Zeta = Índice Zeta
             </p>
         </div>
     </div>
