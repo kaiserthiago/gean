@@ -49,12 +49,12 @@
                     <li>
                         <a href="{% url 'home' %}"
                            class="collapsible-header waves-effect arrow-r {% block class_dashboard %}{% endblock %}"><i
-                                class="fa fa-home"></i> Home</a>
+                                class="fa fa-home mr-1"></i> Home</a>
                     </li>
 
                     <li>
                         <a class="collapsible-header waves-effect arrow-r
-                                {% block class_cadastro_menu %}{% endblock %}"><i class="fas fa-plus-circle"></i>
+                                {% block class_cadastro_menu %}{% endblock %}"><i class="fas fa-pencil-alt mr-1"></i>
                             Cadastros<i class="fas fa-angle-down rotate-icon"></i></a>
                         <div class="collapsible-body">
                             <ul>
@@ -71,38 +71,17 @@
                                     <a href="{% url 'elemento' %}"
                                        class="waves-effect {% block class_elemento_item %}{% endblock %}">Elemento</a>
                                 </li>
-                                {#                                <li>#}
-                                {#                                    <a href="#" class="waves-effect {% block class_medicao_item %}{% endblock %}">Medição</a>#}
-                                {#                                </li>#}
-                                <li>
-                                    <a href="{% url 'projeto' %}"
-                                       class="waves-effect {% block class_projeto_item %}{% endblock %}">Projeto</a>
-                                </li>
                             </ul>
                         </div>
                     </li>
 
-                    {#                    <li>#}
-                    {#                        <a class="collapsible-header waves-effect arrow-r#}
-                    {#                                {% block class_financeiro_menu %}{% endblock %}"><i class="fas fa-money-bill-wave"></i>#}
-                    {#                            Financeiro<i class="fas fa-angle-down rotate-icon"></i></a>#}
-                    {#                        <div class="collapsible-body">#}
-                    {#                            <ul>#}
-                    {#                                <li>#}
-                    {#                                    <a href="#"#}
-                    {#                                       class="waves-effect {% block class_despesa_item %}{% endblock %}">Despesa</a>#}
-                    {#                                </li>#}
-                    {#                                <li>#}
-                    {#                                    <a href="#"#}
-                    {#                                       class="waves-effect {% block class_receita_item %}{% endblock %}">Receita</a>#}
-                    {#                                </li>#}
-                    {#                                <li>#}
-                    {#                                    <a href="#"#}
-                    {#                                       class="waves-effect {% block class_movimento_item %}{% endblock %}">Movimento</a>#}
-                    {#                                </li>#}
-                    {#                            </ul>#}
-                    {#                        </div>#}
-                    {#                    </li>#}
+                    <li>
+                        <a href="{% url 'projeto' %}"
+                           class="collapsible-header waves-effect arrow-r {% block class_projeto %}{% endblock %}"><i
+                                class="fas fa-file-signature mr-1"></i> Projetos</a>
+                    </li>
+
+                    <li class="social"></li>
 
                     <li>
                         <a href="{% url 'logout' %}" class="collapsible-header waves-effect arrow-r red-text"><i

@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}Projetos{% endblock %}
-{% block class_cadastro_menu %}active{% endblock %}
-{% block class_projeto_item %}collapsible-header active{% endblock %}
+{% block class_projeto %}active{% endblock %}
 {% load static %}
 
 {% block breadcrumb_base %}
     <ol class="breadcrumb blue-grey lighten-4">
         <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
         <li class="breadcrumb-item"><a href="{% url 'projeto' %}">Projetos</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'projeto_visualizar' projeto.id %}">Medições</a></li>
         <li class="breadcrumb-item active">Importar Dados</li>
     </ol>
 {% endblock %}
