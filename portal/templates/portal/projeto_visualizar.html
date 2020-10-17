@@ -102,7 +102,12 @@
                     <tbody>
                     {% for media in media_concentracao %}
                         <tr>
-                            <td style="text-align: center">{{ media.dados_elemento__elemento__simbolo }}</td>
+                            <td style="text-align: center">
+                                {{ media.dados_elemento__elemento__simbolo }}
+                                {% if media.dados_elemento__tipo_concentracao == 1 %}
+                                    <span class="red-text font-weight-bold">*</span>
+                                {% endif %}
+                            </td>
                             <td style="text-align: center">{{ media.total }}</td>
                             <td style="text-align: center">{{ media.concentracao|floatformat:4 }}</td>
                             <td style="text-align: center">{{ media.incerteza_padrao|floatformat:4 }}</td>
@@ -146,7 +151,7 @@
             <hr>
 
             <p class="font-small">
-                N = Número de Determinações; X = Valor Médio; Y = Incerteza Padrão Média; DP =
+                * Tipo de Concentração Informada; N = Número de Determinações; X = Valor Médio; Y = Incerteza Padrão Média; DP =
                 Desvio Padrão; DA = Diferença Absoluta; DPR(%) =
                 Desvio Padrão Relativo; Er(%) = Erro Relativo Percentual; En = Erro Normalizado; Z = Índice Z; Z Horwitz
                 = Índice Z Aplicando Fator Horwitz; Zeta = Índice Zeta
@@ -180,7 +185,12 @@
                     {% for medicao in projeto.get_medicoes %}
                         <tr>
                             <td>{{ medicao.dados_elemento.certificado.codigo }}</td>
-                            <td>{{ medicao.dados_elemento.elemento.simbolo }}</td>
+                            <td>
+                                {{ medicao.dados_elemento.elemento.simbolo }}
+                                {% if medicao.dados_elemento.tipo_concentracao == 1 %}
+                                    <span class="red-text font-weight-bold">*</span>
+                                {% endif %}
+                            </td>
                             <td style="text-align: center">{{ medicao.data|date:'d/m/Y' }}</td>
                             <td style="text-align: center">{{ medicao.concentracao_medicao }}</td>
                             <td style="text-align: center">{{ medicao.incerteza_padrao_medicao }}</td>

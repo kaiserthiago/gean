@@ -57,7 +57,7 @@ class CertificadoElementoAdmin(ImportExportModelAdmin):
         'fracao_massa',
         'tipo_fracao_massa'
     )
-    list_filter = ('certificado__descricao', 'elemento__simbolo')
+    list_filter = ('certificado__codigo', 'elemento__simbolo')
     search_fields = ('certificado__descricao', 'elemento__simbolo')
 
     form = CertificadoElementoForm

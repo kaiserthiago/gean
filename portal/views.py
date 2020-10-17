@@ -28,6 +28,7 @@ def medicao_delete(request, medicao_id, projeto_id):
 
     return redirect('projeto_visualizar', projeto_id)
 
+
 @login_required
 def projeto_importar(request, projeto_id):
     projeto = get_object_or_404(Projeto, id=projeto_id)
@@ -108,8 +109,10 @@ def projeto_visualizar(request, projeto_id):
 
     media_concentracao = Medicao.objects.filter(projeto=projeto).order_by(
         'dados_elemento__elemento__simbolo').values(
-        'dados_elemento__elemento__simbolo', 'dados_elemento__concentracao', 'dados_elemento__incerteza_expandida', 'dados_elemento__incerteza_padrao', 'dados_elemento__tipo_fracao_massa').annotate(concentracao=Avg('concentracao_medicao'),
-                                                      incerteza_padrao=Avg('incerteza_padrao_medicao'), total=Count('id')).distinct()
+        'dados_elemento__elemento__simbolo', 'dados_elemento__concentracao', 'dados_elemento__incerteza_expandida',
+        'dados_elemento__incerteza_padrao', 'dados_elemento__tipo_fracao_massa', 'dados_elemento__tipo_concentracao').annotate(
+        concentracao=Avg('concentracao_medicao'),
+        incerteza_padrao=Avg('incerteza_padrao_medicao'), total=Count('id')).distinct()
 
     elementos = Medicao.objects.filter(projeto=projeto).order_by(
         'dados_elemento__elemento__simbolo').values_list(
@@ -254,6 +257,7 @@ def dados_certificados(request):
     }
 
     return render(request, 'portal/dados_certificados.html', context)
+
 
 @login_required
 def dados_certificados_importar(request):
