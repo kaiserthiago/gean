@@ -71,7 +71,7 @@ class Certificado(AuditoriaMixin):
         verbose_name_plural = 'Certificados'
 
     def __str__(self):
-        return self.descricao + ' - ' + self.codigo
+        return self.codigo
 
 
 class CertificadoElemento(AuditoriaMixin):
