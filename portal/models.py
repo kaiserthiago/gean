@@ -87,10 +87,12 @@ class CertificadoElemento(AuditoriaMixin):
 
     CERTIFICADO = 0
     INFORMADO = 1
+    REFERENCIA = 2
 
     TIPO_CONCENTRACAO = [
         [CERTIFICADO, 'Certificado'],
-        [INFORMADO, 'Informado']
+        [INFORMADO, 'Informado'],
+        [REFERENCIA, 'Referência']
     ]
 
     certificado = models.ForeignKey(Certificado, on_delete=models.CASCADE)

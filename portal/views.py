@@ -396,6 +396,8 @@ def dados_certificados_importar(request):
                     dados.tipo_concentracao = 0
                 elif n[1] == 'Informado':
                     dados.tipo_concentracao = 1
+                elif n[1] == 'Referência':
+                    dados.tipo_concentracao = 2
 
                 # TIPO DE FRAÇÃO DE MASSA
                 if n[8] == '%':
