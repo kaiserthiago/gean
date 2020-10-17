@@ -44,8 +44,13 @@
                     </table>
                 </div>
                 <div class="col-sm-4 mt-4">
-                    <a class="btn btn-success" href="{% url 'projeto_importar' projeto.id %}"><i
-                            class="fas fa-download mr-1 white-text"></i>Importar Dados</a>
+                    <a style="cursor: not-allowed" class="btn primary-color-dark white-text" href="#">
+                        <i class="fas fa-plus-circle mr-1 white-text"></i>Adicionar Medição
+                    </a>
+
+                    <a class="btn success-color-dark white-text" href="{% url 'projeto_importar' projeto.id %}">
+                        <i class="fas fa-download mr-1 white-text"></i>Importar Medições
+                    </a>
 
                 </div>
             </div>
