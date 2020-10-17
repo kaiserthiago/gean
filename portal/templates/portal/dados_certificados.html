@@ -23,8 +23,11 @@
                         <label for="myInput" class="active">Pesquisar</label>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <a class="float-right btn success-color-dark white-text btn-rounded" href="{% url 'dados_certificados_importar' %}"><i class="fa fa-download mr-1"></i>Importar Dados</a>
+                <div class="col-sm-3 mt-2">
+                    <a class="float-right btn success-color-dark white-text" href="{% url 'dados_certificados_importar' %}"><i class="fa fa-download mr-1"></i>Importar Dados</a>
+                    <a style="cursor: not-allowed" class="float-right btn primary-color-dark white-text" href="#">
+                        <i class="fas fa-plus-circle mr-1 white-text"></i>Adicionar Dados
+                    </a>
                 </div>
             </div>
 
