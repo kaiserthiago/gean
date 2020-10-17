@@ -108,7 +108,7 @@ def projeto_visualizar(request, projeto_id):
 
     media_concentracao = Medicao.objects.filter(projeto=projeto).order_by(
         'dados_elemento__elemento__simbolo').values(
-        'dados_elemento__elemento__simbolo', 'dados_elemento__concentracao', 'dados_elemento__incerteza_expandida', 'dados_elemento__incerteza_padrao').annotate(concentracao=Avg('concentracao_medicao'),
+        'dados_elemento__elemento__simbolo', 'dados_elemento__concentracao', 'dados_elemento__incerteza_expandida', 'dados_elemento__incerteza_padrao', 'dados_elemento__tipo_fracao_massa').annotate(concentracao=Avg('concentracao_medicao'),
                                                       incerteza_padrao=Avg('incerteza_padrao_medicao'), total=Count('id')).distinct()
 
     elementos = Medicao.objects.filter(projeto=projeto).order_by(

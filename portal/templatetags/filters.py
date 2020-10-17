@@ -56,9 +56,10 @@ def dpr(media_incerteza, media_concentracao):
     c = b.replace('.', ',')
     return c.replace('v', '.')
 
+
 @register.simple_tag(name='er')
 def er(media_concentracao, referencia):
-    resultado = float((((media_concentracao - referencia)/referencia) * 100))
+    resultado = float((((media_concentracao - referencia) / referencia) * 100))
     a = '{:,.4f}'.format(resultado)
     b = a.replace(',', 'v')
     c = b.replace('.', ',')
@@ -69,7 +70,8 @@ def er(media_concentracao, referencia):
 def en(media_concentracao, referencia_concentracao, media_incerteza, referencia_incerteza):
     if referencia_incerteza:
         resultado = float(
-            (float(media_concentracao) - float(referencia_concentracao)) / ((float(media_incerteza)**2)+(float(referencia_incerteza)**2)**float(0.5))
+            (float(media_concentracao) - float(referencia_concentracao)) / (
+                        (float(media_incerteza) ** 2) + (float(referencia_incerteza) ** 2) ** float(0.5))
         )
         a = '{:,.4f}'.format(resultado)
         b = a.replace(',', 'v')
@@ -78,22 +80,25 @@ def en(media_concentracao, referencia_concentracao, media_incerteza, referencia_
     else:
         return '-'
 
+
 @register.simple_tag(name='z_score')
 def z_score(media_concentracao, referencia_concentracao, referencia_incerteza):
     if referencia_incerteza:
-        resultado = float(((media_concentracao - referencia_concentracao)/referencia_incerteza))
+        resultado = float(((media_concentracao - referencia_concentracao) / referencia_incerteza))
         a = '{:,.4f}'.format(resultado)
         b = a.replace(',', 'v')
         c = b.replace('.', ',')
         return c.replace('v', '.')
     else:
         return '-'
+
 
 @register.simple_tag(name='zeta_score')
 def zeta_score(media_concentracao, referencia_concentracao, media_incerteza, referencia_incerteza_padrao):
     if referencia_incerteza_padrao:
         resultado = float(
-            (float(media_concentracao) - float(referencia_concentracao)) / ((float(media_incerteza)**2)+(float(referencia_incerteza_padrao)**2)**float(0.5))
+            (float(media_concentracao) - float(referencia_concentracao)) / (
+                        (float(media_incerteza) ** 2) + (float(referencia_incerteza_padrao) ** 2) ** float(0.5))
         )
         a = '{:,.4f}'.format(resultado)
         b = a.replace(',', 'v')
@@ -101,6 +106,40 @@ def zeta_score(media_concentracao, referencia_concentracao, media_incerteza, ref
         return c.replace('v', '.')
     else:
         return '-'
+
+
+@register.simple_tag(name='z_horwitz')
+def z_horwitz(media_concentracao, referencia_concentracao, tipo_fracao_massa):
+    if referencia_concentracao:
+        # CÁLCULO DO DESVIO PADRÃO DE HORWITZ
+        if media_concentracao > 0.138:
+            dp_horwitz = 0.01 * (float(media_concentracao) ** 0.5)
+        elif media_concentracao >= 0.00000012:
+            dp_horwitz = 0.022 * (float(media_concentracao) ** 0.8495)
+        else:
+            dp_horwitz = media_concentracao * 0.022
+
+        if tipo_fracao_massa == 0:  # TIPO %
+            resultado = float(
+                (float(media_concentracao / 100) - float(referencia_concentracao / 100)) / float(dp_horwitz)
+            )
+        elif tipo_fracao_massa == 1:  # TIPO PPM
+            resultado = float(
+                (float(media_concentracao / 1000000) - float(referencia_concentracao / 1000000)) / float(dp_horwitz)
+            )
+        elif tipo_fracao_massa == 2:  # TIPO PPB
+            resultado = float(
+                (float(media_concentracao / 1000000000) - float(referencia_concentracao / 1000000000)) / float(
+                    dp_horwitz)
+            )
+
+        a = '{:,.4f}'.format(resultado)
+        b = a.replace(',', 'v')
+        c = b.replace('.', ',')
+        return c.replace('v', '.')
+    else:
+        return '-'
+
 
 @register.filter(name='has_group')
 def has_group(user, group_name):
