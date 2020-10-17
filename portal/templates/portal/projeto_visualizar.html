@@ -23,17 +23,19 @@
                 <div class="col-sm-8">
                     <table class="table table-borderless">
                         <tr>
-                            <td>
+                            <td colspan="2">
                                 <span class="font-weight-bold">Autor: </span> {{ projeto.autor }}
                             </td>
                             <td>
                                 <span class="font-weight-bold">Início: </span> {{ projeto.data_inicio }}
                             </td>
-
                         </tr>
                         <tr>
                             <td>
                                 <span class="font-weight-bold">Descrição: </span> {{ projeto.descricao }}
+                            </td>
+                            <td>
+                                <span class="font-weight-bold">Medições: </span> {{ projeto.get_medicoes.count }}
                             </td>
                             <td>
                                 <span class="font-weight-bold">Situação: </span> {{ projeto.get_situacao_display }}
