@@ -48,6 +48,18 @@ def projeto_importar(request, projeto_id):
         # PEGA O CERTIFICADO
         certificado1 = Certificado.objects.get(id=request.POST['certificado1'])
 
+        if not 'myfile1' in request.FILES:
+            messages.error(request, 'É preciso selecionar um arquivo')
+            return redirect('projeto_importar', projeto_id)
+
+        if 'certificado2' in request.POST and not 'myfile2' in request.FILES:
+            messages.error(request, 'É preciso selecionar um arquivo')
+            return redirect('projeto_importar', projeto_id)
+
+        if 'certificado3' in request.POST and not 'myfile3' in request.FILES:
+            messages.error(request, 'É preciso selecionar um arquivo')
+            return redirect('projeto_importar', projeto_id)
+
         # CARREGA OS DADOS DO XLS
         dataset1 = Dataset()
         arquivo1 = request.FILES['myfile1']
@@ -86,10 +98,19 @@ def projeto_importar(request, projeto_id):
                     medicao.intervalo_confianca_medicao = n[5]
                     medicao.tipo_incerteza = 2
 
+                # TIPO DE FRAÇÃO DE MASSA
+                if n[6] == '%':
+                    medicao.tipo_fracao_massa = 0
+                elif n[6] == 'PPM':
+                    medicao.tipo_fracao_massa = 1
+                elif n[6] == 'PPB':
+                    medicao.tipo_fracao_massa = 2
+
                 medicao.user = request.user
                 medicao.save()
             except:
-                pass
+                messages.error(request, 'Erro ao importar dados.')
+                return redirect('projeto_visualizar', projeto_id)
 
         if 'certificado2' in request.POST:
             # PEGA A DATA DO FORM
@@ -140,7 +161,8 @@ def projeto_importar(request, projeto_id):
                     medicao.user = request.user
                     medicao.save()
                 except:
-                    pass
+                    messages.error(request, 'Erro ao importar dados.')
+                    return redirect('projeto_visualizar', projeto_id)
 
         if 'certificado3' in request.POST:
             # PEGA A DATA DO FORM
@@ -191,7 +213,8 @@ def projeto_importar(request, projeto_id):
                     medicao.user = request.user
                     medicao.save()
                 except:
-                    pass
+                    messages.error(request, 'Erro ao importar dados.')
+                    return redirect('projeto_visualizar', projeto_id)
 
         messages.success(request, 'Dados importados com sucesso')
         return redirect('projeto_visualizar', projeto_id)
@@ -212,7 +235,8 @@ def projeto_visualizar(request, projeto_id):
     media_concentracao = Medicao.objects.filter(projeto=projeto).order_by(
         'dados_elemento__elemento__simbolo').values(
         'dados_elemento__elemento__simbolo', 'dados_elemento__concentracao', 'dados_elemento__incerteza_expandida',
-        'dados_elemento__incerteza_padrao', 'dados_elemento__tipo_fracao_massa', 'dados_elemento__tipo_concentracao').annotate(
+        'dados_elemento__incerteza_padrao', 'dados_elemento__tipo_fracao_massa', 'dados_elemento__tipo_concentracao',
+        'tipo_fracao_massa').annotate(
         concentracao=Avg('concentracao_medicao'),
         incerteza_padrao=Avg('incerteza_padrao_medicao'), total=Count('id')).distinct()
 
@@ -366,6 +390,18 @@ def dados_certificados_importar(request):
     certificados = Certificado.objects.all()
 
     if request.method == 'POST':
+        if not 'myfile1' in request.FILES:
+            messages.error(request, 'É preciso selecionar um arquivo')
+            return redirect('dados_certificados')
+
+        if 'certificado2' in request.POST and not 'myfile2' in request.FILES:
+            messages.error(request, 'É preciso selecionar um arquivo')
+            return redirect('dados_certificados')
+
+        if 'certificado3' in request.POST and not 'myfile3' in request.FILES:
+            messages.error(request, 'É preciso selecionar um arquivo')
+            return redirect('dados_certificados')
+
         # PEGA O CERTIFICADO
         certificado1 = Certificado.objects.get(id=request.POST['certificado1'])
 
@@ -416,7 +452,8 @@ def dados_certificados_importar(request):
                 dados.user = request.user
                 dados.save()
             except:
-                pass
+                messages.error(request, 'Erro ao importar dados.')
+                return redirect('dados_certificados')
 
         if 'certificado2' in request.POST:
             # PEGA O CERTIFICADO
@@ -468,7 +505,8 @@ def dados_certificados_importar(request):
                     dados.user = request.user
                     dados.save()
                 except:
-                    pass
+                    messages.error(request, 'Erro ao importar dados.')
+                    return redirect('dados_certificados')
 
         if 'certificado3' in request.POST:
             # PEGA O CERTIFICADO
@@ -520,7 +558,8 @@ def dados_certificados_importar(request):
                     dados.user = request.user
                     dados.save()
                 except:
-                    pass
+                    messages.error(request, 'Erro ao importar dados.')
+                    return redirect('dados_certificados')
 
         messages.success(request, 'Dados importados com sucesso')
         return redirect('dados_certificados')
