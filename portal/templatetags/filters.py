@@ -1,10 +1,6 @@
-import datetime
 import math
 
 from django import template
-from django.contrib.humanize.templatetags.humanize import intcomma
-from django.db.models import Count
-from django.utils.formats import localize
 
 register = template.Library()
 
@@ -14,13 +10,6 @@ def format(my_value):
     if not my_value:
         return '-'
     return my_value
-
-
-@register.simple_tag(name='timestamp_to_date')
-def timestamp_to_date(timestamp):
-    import datetime
-    data = datetime.date.fromtimestamp(int(timestamp))
-    return data.strftime("%d/%m/%Y")
 
 
 @register.simple_tag(name='diferenca_absoluta')
