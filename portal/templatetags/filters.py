@@ -112,20 +112,31 @@ def zeta_score(media_concentracao, referencia_concentracao, media_incerteza, ref
 @register.simple_tag(name='z_horwitz')
 def z_horwitz(media_concentracao, referencia_concentracao, fracao_massa_certificado, fracao_massa_medicao):
     if referencia_concentracao:
-        if fracao_massa_medicao == 1:  # TIPO PPM
-            media_concentracao = media_concentracao / 10000
-            referencia_concentracao = referencia_concentracao / 10000
-        elif fracao_massa_medicao == 2:  # TIPO PPB
-            media_concentracao = media_concentracao / 10000000
-            referencia_concentracao = referencia_concentracao / 10000000
+        if fracao_massa_medicao == 1 and fracao_massa_certificado == 0:  # MEDIÇÃO (PPM) E CERTIFICADO (%)
+            media_concentracao = (media_concentracao / 10000) / 100
+            referencia_concentracao = (referencia_concentracao / 10000) / 100
 
-        if fracao_massa_certificado == 0:  # TIPO %
+        elif fracao_massa_medicao == 2 and fracao_massa_certificado == 0:  # MEDIÇÃO (PPB) E CERTIFICADO (%)
+            media_concentracao = (media_concentracao / 10000000) / 100
+            referencia_concentracao = (referencia_concentracao / 10000000) / 100
+
+        elif fracao_massa_medicao == 2 and fracao_massa_certificado == 2:  # MEDIÇÃO (PPB) E CERTIFICADO (PPM)
+            media_concentracao = (media_concentracao / 1000) / 1000000000
+            referencia_concentracao = (referencia_concentracao / 1000) / 1000000000
+
+        elif fracao_massa_medicao == 2 and fracao_massa_certificado == 2:  # MEDIÇÃO (PPM) E CERTIFICADO (PPB)
+            media_concentracao = (media_concentracao * 1000) / 1000000000000
+            referencia_concentracao = (referencia_concentracao * 1000) / 1000000000000
+
+        elif fracao_massa_medicao == 0 and fracao_massa_certificado == 0:  # MEDIÇÃO (%) CERTIFICADO (%)
             media_concentracao = media_concentracao / 100
             referencia_concentracao = referencia_concentracao / 100
-        elif fracao_massa_certificado == 1:  # TIPO PPM
+
+        elif fracao_massa_medicao == 1 and fracao_massa_certificado == 1:  # MEDIÇÃO (PPM) CERTIFICADO (PPM)
             media_concentracao = media_concentracao / 1000000
             referencia_concentracao = referencia_concentracao / 1000000
-        elif fracao_massa_certificado == 2:  # TIPO PPB
+
+        elif fracao_massa_medicao == 2 and fracao_massa_certificado == 2:  # MEDIÇÃO (PPB) E CERTIFICADO (PPB)
             media_concentracao = media_concentracao / 1000000000
             referencia_concentracao = referencia_concentracao / 1000000000
 
