@@ -110,15 +110,22 @@ def zeta_score(media_concentracao, referencia_concentracao, media_incerteza, ref
 
 
 @register.simple_tag(name='z_horwitz')
-def z_horwitz(media_concentracao, referencia_concentracao, tipo_fracao_massa):
+def z_horwitz(media_concentracao, referencia_concentracao, fracao_massa_certificado, fracao_massa_medicao):
     if referencia_concentracao:
-        if tipo_fracao_massa == 0:  # TIPO %
+        if fracao_massa_medicao == 1:  # TIPO PPM
+            media_concentracao = media_concentracao / 10000
+            referencia_concentracao = referencia_concentracao / 10000
+        elif fracao_massa_medicao == 2:  # TIPO PPB
+            media_concentracao = media_concentracao / 10000000
+            referencia_concentracao = referencia_concentracao / 10000000
+
+        if fracao_massa_certificado == 0:  # TIPO %
             media_concentracao = media_concentracao / 100
             referencia_concentracao = referencia_concentracao / 100
-        elif tipo_fracao_massa == 1:  # TIPO PPM
+        elif fracao_massa_certificado == 1:  # TIPO PPM
             media_concentracao = media_concentracao / 1000000
             referencia_concentracao = referencia_concentracao / 1000000
-        elif tipo_fracao_massa == 2:  # TIPO PPB
+        elif fracao_massa_certificado == 2:  # TIPO PPB
             media_concentracao = media_concentracao / 1000000000
             referencia_concentracao = referencia_concentracao / 1000000000
 

@@ -125,7 +125,7 @@
                                 <td style="text-align: center">{% er media.concentracao media.dados_elemento__concentracao %}</td>
                                 <td style="text-align: center">{% en media.concentracao media.dados_elemento__concentracao media.incerteza_padrao media.dados_elemento__incerteza_expandida %}</td>
                                 <td style="text-align: center">{% z_score media.concentracao media.dados_elemento__concentracao media.dados_elemento__incerteza_expandida %}</td>
-                                <td style="text-align: center">{% z_horwitz media.concentracao media.dados_elemento__concentracao media.dados_elemento__tipo_fracao_massa %}</td>
+                                <td style="text-align: center">{% z_horwitz media.concentracao media.dados_elemento__concentracao media.dados_elemento__tipo_fracao_massa media.tipo_fracao_massa %}</td>
                                 <td style="text-align: center">{% zeta_score media.concentracao media.dados_elemento__concentracao media.incerteza_padrao media.dados_elemento__incerteza_padrao %}</td>
 
 
@@ -183,6 +183,7 @@
                         <th scope="col" style="text-align: center">Incerteza Expandida</th>
                         <th scope="col" style="text-align: center">Incerteza Expandida Combinada</th>
                         <th scope="col" style="text-align: center">Intervalo de Confiança</th>
+                        <th scope="col" style="text-align: center">Tipo de Fração de Massa</th>
                         <th scope="col" style="text-align: right">Ações</th>
                     </tr>
                     </thead>
@@ -202,6 +203,7 @@
                             <td style="text-align: center">{{ medicao.incerteza_expandida_medicao }}</td>
                             <td style="text-align: center">{{ medicao.incerteza_expandida_combinada }}</td>
                             <td style="text-align: center">{{ medicao.intervalo_confianca_medicao }}</td>
+                            <td style="text-align: center">{{ medicao.get_tipo_fracao_massa_display }}</td>
                             <td style="text-align: right; width: 10%">
                                 <a data-toggle="modal" href="#Excluir{{ medicao.id }}"><i
                                         class="fas fa-trash mr-1 red-text" data-toggle="tooltip"

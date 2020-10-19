@@ -162,6 +162,7 @@ class Medicao(AuditoriaMixin):
                                                         max_digits=15,
                                                         validators=[MinValueValidator(0)], default=0, null=True,
                                                         blank=True, help_text='Dados da medição')
+    tipo_fracao_massa = models.IntegerField(verbose_name='Tipo Fração de Massa', choices=CertificadoElemento.TIPO_FRACAO, default=1)
 
     class Meta:
         verbose_name = 'Medição'

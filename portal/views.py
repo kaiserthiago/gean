@@ -392,15 +392,15 @@ def dados_certificados_importar(request):
     if request.method == 'POST':
         if not 'myfile1' in request.FILES:
             messages.error(request, 'É preciso selecionar um arquivo')
-            return redirect('dados_certificados')
+            return redirect('dados_certificados_importar')
 
         if 'certificado2' in request.POST and not 'myfile2' in request.FILES:
             messages.error(request, 'É preciso selecionar um arquivo')
-            return redirect('dados_certificados')
+            return redirect('dados_certificados_importar')
 
         if 'certificado3' in request.POST and not 'myfile3' in request.FILES:
             messages.error(request, 'É preciso selecionar um arquivo')
-            return redirect('dados_certificados')
+            return redirect('dados_certificados_importar')
 
         # PEGA O CERTIFICADO
         certificado1 = Certificado.objects.get(id=request.POST['certificado1'])
