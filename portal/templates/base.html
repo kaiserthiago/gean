@@ -223,19 +223,19 @@
         {% if message.tags == 'error' %}
             <script type='text/javascript'>
                 $("document").ready(function () {
-                    toastr["danger"]("{{ message }}")
+                    toastr["error"]( "{{ message }}", "Erro")
                 });
             </script>
         {% elif message.tags == 'success' %}
             <script type='text/javascript'>
                 $("document").ready(function () {
-                    toastr["success"]("{{ message }}")
+                    toastr["success"]( "{{ message }}", "Sucesso")
                 });
             </script>
         {% elif message.tags == 'warning' %}
             <script type='text/javascript'>
                 $("document").ready(function () {
-                    toastr["warning"]("{{ message }}")
+                    toastr["warning"]( "{{ message }}", "Aviso")
                 });
             </script>
         {% elif message.tags == 'info' %}
@@ -313,9 +313,9 @@
         "positionClass": "md-toast-top-right",
         "preventDuplicates": false,
         "onclick": null,
-        "showDuration": 300,
-        "hideDuration": 1000,
-        "timeOut": 3500,
+        "showDuration": 200,
+        "hideDuration": 200,
+        "timeOut": 0,
         "extendedTimeOut": 1000,
         "showEasing": "swing",
         "hideEasing": "linear",
