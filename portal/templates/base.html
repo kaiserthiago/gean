@@ -20,6 +20,30 @@
     <link href="{% static 'css/style.css' %}" rel="stylesheet" media="all">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
 
+    <style>
+        .table-hideable td,
+        .table-hideable th {
+            width: auto;
+            transition: width .5s, margin .5s;
+        }
+
+        .btn-condensed.btn-condensed {
+            padding: 0 5px;
+            box-shadow: none;
+        }
+
+
+        /* use class to have a little animation */
+        .hide-col {
+            width: 0px !important;
+            height: 0px !important;
+            display: block !important;
+            overflow: hidden !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+        }
+    </style>
     {% block head %}
 
     {% endblock %}
@@ -223,19 +247,19 @@
         {% if message.tags == 'error' %}
             <script type='text/javascript'>
                 $("document").ready(function () {
-                    toastr["error"]( "{{ message }}", "Erro")
+                    toastr["error"]("{{ message }}", "Erro")
                 });
             </script>
         {% elif message.tags == 'success' %}
             <script type='text/javascript'>
                 $("document").ready(function () {
-                    toastr["success"]( "{{ message }}", "Sucesso")
+                    toastr["success"]("{{ message }}", "Sucesso")
                 });
             </script>
         {% elif message.tags == 'warning' %}
             <script type='text/javascript'>
                 $("document").ready(function () {
-                    toastr["warning"]( "{{ message }}", "Aviso")
+                    toastr["warning"]("{{ message }}", "Aviso")
                 });
             </script>
         {% elif message.tags == 'info' %}
@@ -330,6 +354,46 @@
     }
 </script>
 
+<script>
+    $(function () {
+        // on init
+        $(".table-hideable .hide-col").each(HideColumnIndex);
+
+        // on click
+        $('.hide-column').click(HideColumnIndex)
+
+        function HideColumnIndex() {
+            var $el = $(this);
+            var $cell = $el.closest('th,td')
+            var $table = $cell.closest('table')
+
+            // get cell location - https://stackoverflow.com/a/4999018/1366033
+            var colIndex = $cell[0].cellIndex + 1;
+
+            // find and hide col index
+            $table.find("tbody tr, thead tr")
+                .children(":nth-child(" + colIndex + ")")
+                .addClass('hide-col');
+
+            // show restore footer
+            $table.find(".footer-restore-columns").show()
+        }
+
+        // restore columns footer
+        $(".restore-columns").click(function (e) {
+            var $table = $(this).closest('table')
+            $table.find(".footer-restore-columns").hide()
+            $table.find("th, td")
+                .removeClass('hide-col');
+
+        })
+
+        $('[data-toggle="tooltip"]').tooltip({
+            trigger: 'hover'
+        })
+
+    })
+</script>
 {% block script %}
 
 {% endblock %}
