@@ -1,4 +1,5 @@
 import datetime
+import math
 
 from django import template
 from django.contrib.humanize.templatetags.humanize import intcomma
@@ -67,11 +68,11 @@ def er(media_concentracao, referencia):
 
 
 @register.simple_tag(name='en')
-def en(media_concentracao, referencia_concentracao, media_incerteza, referencia_incerteza):
-    if referencia_incerteza:
+def en(media_concentracao, referencia_concentracao, media_incerteza, referencia_incerteza_expandida):
+    if referencia_incerteza_expandida:
         resultado = float(
-            (float(media_concentracao) - float(referencia_concentracao)) / (
-                        (float(media_incerteza) ** 2) + (float(referencia_incerteza) ** 2) ** float(0.5))
+            (float(media_concentracao) - float(referencia_concentracao)) / math.sqrt(
+                        (float(media_incerteza) ** 2) + (float(referencia_incerteza_expandida) ** 2))
         )
         a = '{:,.4f}'.format(resultado)
         b = a.replace(',', 'v')
@@ -97,8 +98,8 @@ def z_score(media_concentracao, referencia_concentracao, referencia_incerteza):
 def zeta_score(media_concentracao, referencia_concentracao, media_incerteza, referencia_incerteza_padrao):
     if referencia_incerteza_padrao:
         resultado = float(
-            (float(media_concentracao) - float(referencia_concentracao)) / (
-                        (float(media_incerteza) ** 2) + (float(referencia_incerteza_padrao) ** 2) ** float(0.5))
+            (float(media_concentracao) - float(referencia_concentracao)) / math.sqrt(
+                        (float(media_incerteza) ** 2) + (float(referencia_incerteza_padrao) ** 2))
         )
         a = '{:,.4f}'.format(resultado)
         b = a.replace(',', 'v')
@@ -111,27 +112,28 @@ def zeta_score(media_concentracao, referencia_concentracao, media_incerteza, ref
 @register.simple_tag(name='z_horwitz')
 def z_horwitz(media_concentracao, referencia_concentracao, tipo_fracao_massa):
     if referencia_concentracao:
+        if tipo_fracao_massa == 0:  # TIPO %
+            media_concentracao = media_concentracao / 100
+            referencia_concentracao = referencia_concentracao / 100
+        elif tipo_fracao_massa == 1:  # TIPO PPM
+            media_concentracao = media_concentracao / 1000000
+            referencia_concentracao = referencia_concentracao / 1000000
+        elif tipo_fracao_massa == 2:  # TIPO PPB
+            media_concentracao = media_concentracao / 1000000000
+            referencia_concentracao = referencia_concentracao / 1000000000
+
         # CÁLCULO DO DESVIO PADRÃO DE HORWITZ
         if media_concentracao > 0.138:
-            dp_horwitz = 0.01 * (float(media_concentracao) ** 0.5)
+            dp_horwitz = 0.01 * math.sqrt(float(media_concentracao))
         elif media_concentracao >= 0.00000012:
             dp_horwitz = 0.022 * (float(media_concentracao) ** 0.8495)
         else:
-            dp_horwitz = media_concentracao * 0.022
+            dp_horwitz = float(media_concentracao) * 0.022
 
-        if tipo_fracao_massa == 0:  # TIPO %
-            resultado = float(
-                (float(media_concentracao / 100) - float(referencia_concentracao / 100)) / float(dp_horwitz)
-            )
-        elif tipo_fracao_massa == 1:  # TIPO PPM
-            resultado = float(
-                (float(media_concentracao / 1000000) - float(referencia_concentracao / 1000000)) / float(dp_horwitz)
-            )
-        elif tipo_fracao_massa == 2:  # TIPO PPB
-            resultado = float(
-                (float(media_concentracao / 1000000000) - float(referencia_concentracao / 1000000000)) / float(
-                    dp_horwitz)
-            )
+        resultado = float(
+            (float(media_concentracao) - float(referencia_concentracao)) / float(
+                dp_horwitz)
+        )
 
         a = '{:,.4f}'.format(resultado)
         b = a.replace(',', 'v')
