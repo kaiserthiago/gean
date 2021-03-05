@@ -253,7 +253,7 @@ def projeto_visualizar(request, projeto_id):
         lista_elementos = [obj[0] for obj in elementos]
 
     for i in lista_elementos:
-        valores = Medicao.objects.filter(dados_elemento__elemento__simbolo=i)
+        valores = Medicao.objects.filter(dados_elemento__elemento__simbolo=i, projeto=projeto)
 
         for valor in valores:
             lista_concentracao_medicao.append(valor.concentracao_medicao)
@@ -261,6 +261,7 @@ def projeto_visualizar(request, projeto_id):
         mediana[i] = float(statistics.median(lista_concentracao_medicao))
         desvio_padrao[i] = float(statistics.pstdev(lista_concentracao_medicao))
         variancia[i] = float(statistics.pvariance(lista_concentracao_medicao))
+        lista_concentracao_medicao = []
 
     context = {
         'projeto': projeto,
