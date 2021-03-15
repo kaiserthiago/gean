@@ -22,8 +22,10 @@ def diferenca_absoluta(media, referencia):
 
 
 @register.simple_tag(name='dpr')
-def dpr(media_incerteza, media_concentracao):
-    resultado = float(((media_incerteza / media_concentracao) * 100))
+def dpr(desvio_padrao, media_concentracao):
+    from decimal import Decimal
+    desvio_padrao = Decimal(desvio_padrao)
+    resultado = float(((desvio_padrao / media_concentracao) * 100))
     a = '{:,.4f}'.format(resultado)
     b = a.replace(',', 'v')
     c = b.replace('.', ',')

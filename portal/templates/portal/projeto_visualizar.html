@@ -226,7 +226,13 @@
                                 {% endfor %}
 
                                 <td style="text-align: center">{% diferenca_absoluta media.concentracao media.dados_elemento__concentracao %}</td>
-                                <td style="text-align: center">{% dpr media.incerteza_padrao media.concentracao %}</td>
+                                <td style="text-align: center">
+                                    {% for elemento, valor in desvio_padrao.items %}
+                                        {% if elemento == media.dados_elemento__elemento__simbolo %}
+                                            {% dpr valor media.concentracao %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
                                 <td style="text-align: center">{% er media.concentracao media.dados_elemento__concentracao %}</td>
                                 <td style="text-align: center">{% en media.concentracao media.dados_elemento__concentracao media.incerteza_padrao media.dados_elemento__incerteza_expandida %}</td>
                                 <td style="text-align: center">{% z_score media.concentracao media.dados_elemento__concentracao media.dados_elemento__incerteza_expandida %}</td>
@@ -255,8 +261,9 @@
                         <tfoot class="footer-restore-columns">
                         <tr>
                             <th colspan="17">
-                                <a class="restore-columns btn btn-indigo" href="#">Algumas colunas estão ocultas - Clique
-                                aqui para exibí-las</a></th>
+                                <a class="restore-columns btn btn-indigo" href="#">Algumas colunas estão ocultas -
+                                    Clique
+                                    aqui para exibí-las</a></th>
                         </tr>
                         </tfoot>
                     </table>
